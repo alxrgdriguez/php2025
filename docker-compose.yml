@@ -1,0 +1,49 @@
+version: "3.3"
+
+services:
+  # Nginx
+  web:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./ejercicios/:/var/www/ 
+      - ./nginx.php-fpm.conf:/etc/nginx/nginx.conf:ro
+    links:
+      - php-fpm
+
+  # Configuración de php
+  php-fpm:
+    container_name: php
+    build: .
+    volumes:
+      - ./ejercicios:/var/www/html
+          
+  #MariaDB
+  db:
+    container_name: mariadb
+    image: mariadb:latest
+    restart: always
+    environment:
+        MARIADB_ROOT_PASSWORD: toor
+        MARIADB_DATABASE: ejemplo
+        MARIADB_USER: usuario
+        MARIADB_PASSWORD: usuario
+    ports:
+        - "3307:3306"
+    volumes:
+        - ./mariadb:/var/lib/mysql
+
+  #MongoDB
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: toor
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongodb:/data/db
