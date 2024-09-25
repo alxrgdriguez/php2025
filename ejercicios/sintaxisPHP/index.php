@@ -9,7 +9,7 @@
 
 <body>
 
-    <h1>Servidor con PHP</h1>
+    <h1>Sintaxis básica PHP</h1>
 
     <?php
 
@@ -28,6 +28,8 @@
     $precio = "Cadena"; // La variable es una cadena
 
     echo "<br> El precio es " . $precio;
+
+    var_dump($precio); // Depurar el valor de las variables, especialmente objetos y arrays
 
     ?>
 
