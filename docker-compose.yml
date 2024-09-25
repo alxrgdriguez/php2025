@@ -1,12 +1,10 @@
-version: "3.3"
-
 services:
   # Nginx
   web:
     container_name: nginx
     image: nginx:latest
     ports:
-      - "8080:80"
+      - "8088:80"
     volumes:
       - ./ejercicios/:/var/www/
       - ./nginx.php-fpm.conf:/etc/nginx/nginx.conf:ro
