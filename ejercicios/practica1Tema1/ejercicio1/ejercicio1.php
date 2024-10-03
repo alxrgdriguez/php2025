@@ -15,7 +15,7 @@
     <nav class="navbar bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img src="carrito.png" alt="Logo" width="50" height="54" class="d-inline-block align-text-top">
+                <img src="./img/carrito.png" alt="Logo" width="50" height="54" class="d-inline-block align-text-top">
             </a>
             <h1 class="display-5 ">Carro de la Compra</h1>
         </div>
