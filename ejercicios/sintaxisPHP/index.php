@@ -77,13 +77,7 @@
         echo $clave . " -> " . $valor . "<br>";
     }
 
-
-
-
-
-
-
-
+    phpinfo();
 
     ?>
 

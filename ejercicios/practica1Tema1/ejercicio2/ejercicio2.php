@@ -6,21 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ejercicio 2. Alejandro Rodriguez</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+
+    <style>
+        .contenedorLibro{
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .contenedorLibro div{
+            border: 1px solid black;
+        }
+        p, h4{
+            overflow-wrap: break-word;
+        }
+    </style>
+
 </head>
-
-<body>
-
-    <div class="container">
-
-        <h1 class="text-center p-3">Librería IES JAROSO</h1>
-
-
-    </div>
-
-</body>
-
-</html>
-
 <?php
 $libros_img = "http://localhost:8088/practica1Tema1/ejercicio2/imagenes/";
 $libreria = [
@@ -186,8 +188,60 @@ $libreria = [
 ];
 
 
+function pintarLibro($libreria, $categoria)
+{
+    //mezclar un array
+    shuffle($libreria);
+    $totalCategoria = 0;
+    foreach ($libreria as $libro_bucle) {
+        if ($libro_bucle["categoria"] === $categoria) {
+            $totalCategoria++;
 
-function pintarLibro($libro) {}
+            echo "<div class='col-12 col-sm-6 col-md-3 mb-4 text-center'>";
+                echo "<h4>" . $libro_bucle["titulo"] . "</h4>";
+                echo "<img class='img-fluid'  src='" . $libro_bucle["foto"] . "' alt='Error'/>";
+                echo "<p>" . substr($libro_bucle["descripcion"], 0, 120). "..." . "</p>";
+                echo "<p>" . $libro_bucle["editorial"]  . "</p>";
+                echo "<p>" . $libro_bucle["precio"] . "</p>";
+            echo "</div>";
+
+            if($totalCategoria==4){
+                break;
+            }
+        }
+    }
+
+}
 
 
 ?>
+
+<body>
+
+    <div id="container">
+
+        <h1 class="text-center p-3">Librería IES JAROSO</h1>
+        <h3>Novela Negra</h3>
+        <div class="contenedorLibro contenedorLibro d-flex justify-content-between flex-wrap">
+            <?php
+            pintarLibro($libreria, "Novela Negra");
+            ?>
+        </div>
+
+        <h3>Novela Historica</h3>
+        <div class="contenedorLibro d-flex justify-content-between flex-wrap" >
+            <?php
+            pintarLibro($libreria, "Novela Historica");
+            ?>
+        </div>
+        <h3>Novela Cocina</h3>
+        <div class="contenedorLibro contenedorLibro d-flex justify-content-between flex-wrap">
+            <?php
+            pintarLibro($libreria, "Cocina");
+            ?>
+        </div>
+    </div>
+
+</body>
+
+</html>
