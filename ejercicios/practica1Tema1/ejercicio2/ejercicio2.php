@@ -26,7 +26,7 @@
 
 </head>
 <?php
-$libros_img = "http://localhost:8088/practica1Tema1/ejercicio2/imagenes/";
+$libros_img = "./imagenes";
 $libreria = [
 
     // Libros de Novela Historica
