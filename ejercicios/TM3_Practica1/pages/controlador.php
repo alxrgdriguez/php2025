@@ -12,7 +12,6 @@ if($_POST){
                 $_SESSION['usuarios'] = [];
             }
 
-            //Verificar que el usuario con ese email existe y esa es su contraseña (BBDD)
             if (buscar($correo, $contrasena) == 0) {
                 $_SESSION['usuarios'][] = ['usuario' => $usuario, 'correo' => $correo, 'contrasena' => $contrasena];
                 header("Location: proyectos.php?info=UsuarioCreado");
@@ -28,7 +27,6 @@ if($_POST){
             $contrasena = $_POST['contrasena'];
             $correo = $_POST['correo'];
 
-            //Verificar que el usuario con ese email existe y esa es su contraseña (BBDD)
             if (buscar($correo, $contrasena) == 1) {
                 //si existe igual, eliminamos su contenido
                 if (isset($_SESSION['usuario_conectado'])) {
