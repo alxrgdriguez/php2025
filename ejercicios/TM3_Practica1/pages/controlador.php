@@ -47,7 +47,6 @@ if($_POST){
         }
     }
 
-    //--- $_GET ---
 }else if($_GET) {
     if (isset($_GET['accion'])) {
         if ($_GET['accion'] == 'desconectar') {
@@ -59,6 +58,7 @@ if($_POST){
     header("Location: proyectos.php");
 }
 
+// Accion eliminar Proyecto
 if (isset($_GET['accion']) && $_GET['accion'] == 'EliminarUnProyecto') {
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']); // Convierte a entero
