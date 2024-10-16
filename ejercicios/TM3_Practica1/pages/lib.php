@@ -13,7 +13,7 @@ function buscar($correo, $contrasena) {
         // Recorre el array de usuarios
         foreach ($_SESSION['usuarios'] as $usuario) {
             // Compara el correo y la contraseña
-            if ($usuario['correo'] === $correo && $usuario['contrasena'] === $contrasena) {
+            if (strcmp($usuario['correo'],$correo) && strcmp($usuario['contrasena'], $contrasena)) {
                 return 1; // Usuario encontrado
             }
         }
@@ -21,8 +21,9 @@ function buscar($correo, $contrasena) {
     return 0; // Usuario no encontrado
 }
 
+
 /**
- * Funcion para ganerar un array asociativo de proyectos
+ * Funcion para generar un array asociativo de proyectos
  * @return array[]
  */
 function generarProyecto() {
@@ -79,6 +80,12 @@ function generarProyecto() {
 }
 
 
+/**
+ * Función para calcular el número de días transcurridos entre dos fechas
+ * @param $fechaInicio
+ * @return string
+ * @throws DateMalformedStringException
+ */
 function diasTranscurridos($fechaInicio) {
     $fechaActual = new DateTime();
     $fechaInicioActual = new DateTime($fechaInicio);
@@ -91,17 +98,15 @@ function diasTranscurridos($fechaInicio) {
  * @param $id
  * @return void
  */
-function deleteProyecto($id) {
+/*function deleteProyecto($id) {
     if (isset($_SESSION['proyectos'])) {
         foreach ($_SESSION['proyectos'] as $key => $proyecto) {
             if ($proyecto['id'] == $id) {
                 unset($_SESSION['proyectos'][$key]);
-                return $id; // Devuelve el ID del proyecto eliminado
+                return $id; // Devuelve el id del proyecto eliminado
             }
         }
     }
     return null; // Devuelve null si no se encontró el proyecto
-}
-
-
+}*/
 ?>

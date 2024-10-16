@@ -20,6 +20,7 @@ if($_POST){
                 $_SESSION['usuarios'][] = ['usuario' => $usuario, 'correo' => $correo, 'contrasena' => $contrasena];
                 header("Location: proyectos.php?info=UsuarioCreado");
                 $_SESSION['usuario_conectado'] = [$correo, $contrasena];
+                $_SESSION['proyectos'] = generarProyecto();
             }else{
                 header("Location: proyectos.php?info=UsuarioExistente");
             }
@@ -59,12 +60,12 @@ if($_POST){
 }
 
 // Accion eliminar Proyecto
-if (isset($_GET['accion']) && $_GET['accion'] == 'EliminarUnProyecto') {
+/*if (isset($_GET['accion']) && strcmp($_GET['accion'] ,'EliminarUnProyecto') == 0) {
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']); // Convierte a entero
         $eliminado = deleteProyecto($id);
         header("Location: proyectos.php?info=ProyectoEliminado");
     }
-}
+}*/
 
 ?>
