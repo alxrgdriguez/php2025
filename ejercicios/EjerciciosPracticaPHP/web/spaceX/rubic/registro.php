@@ -9,7 +9,12 @@ include "cabecera.php";
     }
 
      .card{
-         margin-top: 50px;
+         margin-top: 60px;
+         margin-bottom: 30px;
+     }
+
+     .footer{
+         margin-top:80px;
      }
 
      .navbar a .nav-link{
@@ -23,6 +28,7 @@ include "cabecera.php";
 
      .card-body button{
          margin-top: 20px;
+
      }
 
      .boton_registro{
@@ -36,11 +42,7 @@ include "cabecera.php";
 
 </style>
 <body>
-<?php
-if (isset($_GET['error'])) {
-    echo "<p class='text-danger'>Email ya registrado</p>";
-}
-?>
+
 <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center align-items-center h-100">
@@ -66,6 +68,12 @@ if (isset($_GET['error'])) {
                                 <label class="form-label" for="password">Password*</label>
                                 <input type="password" id="typePasswordX" required name="password" minlength="8" class="form-control form-control-lg" />
                             </div>
+
+                            <?php
+                            if (isset($_GET['error'])) {
+                                echo "<p class='text-danger'>Este email ya está en la base de datos</p>";
+                            }
+                            ?>
 
                             <div class="text-center">
                                 <input type="submit" class="boton_registro btn bg-gradient-info w-100 mt-2 mb-0" name="registro">

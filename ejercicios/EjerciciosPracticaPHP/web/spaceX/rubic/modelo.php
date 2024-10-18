@@ -1,5 +1,4 @@
 <?php
-
 // Funciones relativas a BBDD ---------------------------------
 
 /**
@@ -47,7 +46,7 @@ function consularUsuarioPorEmail($email){
     $dbh = null;
 
     // Mostramos los resultados, fetch() devuelve una fila cada vez que lo llamamos
-    if ($row = $stmt->fetch()){  //Select es sobre un campo UNIQUE solo va a devolver 1 o nada
+    if ($stmt->fetch()){  //Select es sobre un campo UNIQUE solo va a devolver 1 o nada
         return 1;
     } else {
         return 0;
@@ -61,9 +60,7 @@ function registrarUsuario($nombre, $email, $password){
     $sbh = conectarBD();
 
     // Insertar con stmt todos los campos
-    $stmt = $sbh->prepare("INSERT INTO usuarios (nombre, email, password) 
-    VALUES (?, ?, ?)");
-
+    $stmt = $sbh->prepare("INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)");
 
     $passwordHash = password_hash($password, PASSWORD_BCRYPT);
     $stmt->bindParam(1, $nombre);
@@ -72,7 +69,6 @@ function registrarUsuario($nombre, $email, $password){
     $stmt->execute(); //La ejecución de la consulta
 
     $sbh = null;
-
 }
 
 ?>

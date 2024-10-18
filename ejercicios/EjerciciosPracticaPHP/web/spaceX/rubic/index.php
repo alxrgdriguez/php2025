@@ -1,6 +1,5 @@
 <?php
-session_start();
-include "cabecera.php";
+include_once "cabecera.php";
 ?>
 
     <header class="header d-flex justify-content-center">
