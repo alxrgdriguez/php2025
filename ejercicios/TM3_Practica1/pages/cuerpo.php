@@ -7,7 +7,11 @@
                 </div>
             </div>
             <div class="card-body px-0 pb-2">
+                <div class="d-flex justify-content-start mb-3 ps-3">
+                    <a href="nuevoProyecto.php" class="btn btn-dark">Agregar Proyecto</a>
+                </div>
                 <div class="table-responsive p-0">
+
                     <table class="table align-items-center justify-content-center mb-0">
                         <thead>
                         <tr>
@@ -28,7 +32,7 @@
                             <td class='border-3'>
                                 <div class='d-flex px-2'>
                                     <div class='my-auto'>
-                                        <h6 class='mb-0'>{$proyecto['nombre']}</h6>
+                                         <a href='verProyecto.php?id={$proyecto['id']}'><h6 class='mb-0'>{$proyecto['nombre']}</h6></a>
                                     </div>
                                 </div>
                             </td>

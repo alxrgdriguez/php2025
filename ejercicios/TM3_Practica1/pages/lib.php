@@ -13,7 +13,7 @@ function buscar($correo, $contrasena) {
         // Recorre el array de usuarios
         foreach ($_SESSION['usuarios'] as $usuario) {
             // Compara el correo y la contraseña
-            if (strcmp($usuario['correo'],$correo) && strcmp($usuario['contrasena'], $contrasena)) {
+            if (strcmp($usuario['correo'], $correo) === 0 && strcmp($usuario['contrasena'], $contrasena) === 0) {//hay que poner === 0 para comprobar que sean iguales con el strcmp
                 return 1; // Usuario encontrado
             }
         }
@@ -33,7 +33,7 @@ function generarProyecto() {
             'nombre' => 'App Móvil',
             'fechaInicio' => '2023-01-10',
             'fechaFin' => '2023-03-10',
-            'dias' => diasTranscurridos('2023-01-10'),
+            'dias' => diasTranscurridos('2023-01-10','2023-03-10'),
             'estado' => '100%'
         ],
         [
@@ -41,7 +41,7 @@ function generarProyecto() {
             'nombre' => 'Sistema CRM',
             'fechaInicio' => '2023-02-15',
             'fechaFin' => '2023-04-15',
-            'dias' => diasTranscurridos('2023-02-15'),
+            'dias' => diasTranscurridos('2023-02-15', '2023-04-15'),
             'estado' => '75%'
         ],
         [
@@ -49,7 +49,7 @@ function generarProyecto() {
             'nombre' => 'Rediseño Web',
             'fechaInicio' => '2023-03-01',
             'fechaFin' => '2023-05-01',
-            'dias' => diasTranscurridos('2023-03-01'),
+            'dias' => diasTranscurridos('2023-03-01', '2023-05-01'),
             'estado' => '5%'
         ],
         [
@@ -57,7 +57,7 @@ function generarProyecto() {
             'nombre' => 'Migración Nube',
             'fechaInicio' => '2023-04-05',
             'fechaFin' => '2023-06-05',
-            'dias' => diasTranscurridos('2023-04-05'),
+            'dias' => diasTranscurridos('2023-04-05', '2023-06-05'),
             'estado' => '100%'
         ],
         [
@@ -65,7 +65,7 @@ function generarProyecto() {
             'nombre' => 'Auditoría SI',
             'fechaInicio' => '2023-05-10',
             'fechaFin' => '2023-07-10',
-            'dias' => diasTranscurridos('2023-05-10'),
+            'dias' => diasTranscurridos('2023-05-10', '2023-07-10'),
             'estado' => '50%'
         ],
         [
@@ -73,7 +73,7 @@ function generarProyecto() {
             'nombre' => 'Proyecto F',
             'fechaInicio' => '2023-06-15',
             'fechaFin' => '2023-08-15',
-            'dias' => diasTranscurridos('2023-06-15'),
+            'dias' => diasTranscurridos('2023-06-15', '2023-07-10'),
             'estado' => '20%'
         ]
     ];
@@ -86,11 +86,34 @@ function generarProyecto() {
  * @return string
  * @throws DateMalformedStringException
  */
-function diasTranscurridos($fechaInicio) {
-    $fechaActual = new DateTime();
+function diasTranscurridos($fechaInicio, $fechaFin)
+{
+    $fechaActual = new DateTime($fechaFin);
     $fechaInicioActual = new DateTime($fechaInicio);
     $dias = $fechaActual->diff($fechaInicioActual)->format('%a dias'); // %a saca el calculo de los dias transcurridos
     return $dias;
+}
+
+function obtenerUltimoIdProyecto() {
+    $proyectos = $_SESSION['proyectos'];
+    $ultimoProyecto = end($proyectos); // Obtiene el último elemento del array
+    return $ultimoProyecto['id']; // Devuelve el ID del último proyecto
+}
+
+function recuperarProyectoPorID($id)
+{
+    // Verifica si la sesión de proyecto está inicializada
+    if (isset($_SESSION['proyectos'])) {
+        // Recorre el array de proyecto
+        foreach ($_SESSION['proyectos'] as $proyecto) {
+            // Compara el correo y la contraseña
+            if (strcmp($proyecto['id'], $id) === 0 ){
+                return $proyecto; // proyecto encontrado
+            }
+        }
+    }
+    return 0; // proyecto no encontrado
+
 }
 
 /**
@@ -98,7 +121,7 @@ function diasTranscurridos($fechaInicio) {
  * @param $id
  * @return void
  */
-/*function deleteProyecto($id) {
+function deleteProyecto($id) {
     if (isset($_SESSION['proyectos'])) {
         foreach ($_SESSION['proyectos'] as $key => $proyecto) {
             if ($proyecto['id'] == $id) {
@@ -108,5 +131,21 @@ function diasTranscurridos($fechaInicio) {
         }
     }
     return null; // Devuelve null si no se encontró el proyecto
-}*/
+}
+
+function buscarProyecto($nombre_proyecto){
+    // Verifica si la sesión de proyectos está inicializada
+    if (isset($_SESSION['proyectos'])) {
+        // Recorre el array de proyectos
+        foreach ($_SESSION['proyectos'] as $proyecto) {
+            // Compara el correo y la contraseña
+            if (strcmp($proyecto['nombre'], $nombre_proyecto) === 0 ){
+                return 1; // proyecto encontrado
+            }
+        }
+    }
+    return 0; // proyecto no encontrado
+
+}
+
 ?>

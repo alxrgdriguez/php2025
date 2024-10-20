@@ -1,5 +1,8 @@
 <?php
 session_start();
+if(isset($_SESSION['usuario_conectado'])){
+    header("Location: proyectos.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
