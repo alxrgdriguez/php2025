@@ -13,10 +13,10 @@ function conectarBD() {
         // 'host' -> Este es el nombre del contenedor de MariaDB
         // Debe coincidir con el nombre que se configuró en el docker-compose
         // '3306' es el puerto predeterminado de MariaDB
-        $dsn = "mysql:host=mariadb;port=3306;dbname=ejemplo";
+        $dsn = "mysql:host=database-1.cwrsjwutr2wz.us-east-1.rds.amazonaws.com;port=3306;dbname=tienda";
 
         // Creamos una nueva instancia de PDO para conectar a la base de datos
-        $dbh = new PDO($dsn, "usuario", "usuario");
+        $dbh = new PDO($dsn, "admin", "FsVoNi0z5yjofL4B4bgH");
 
         // Configuramos PDO para lanzar excepciones en caso de error
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
