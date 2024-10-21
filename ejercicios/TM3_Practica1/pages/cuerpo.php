@@ -15,7 +15,7 @@
                     <table class="table align-items-center justify-content-center mb-0">
                         <thead>
                         <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proyectos</th>
+                            <th  class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Proyectos</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fecha Inicio</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Fecha Fin</th>
                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Dias Transcurridos</th>
@@ -32,7 +32,7 @@
                             <td class='border-3'>
                                 <div class='d-flex px-2'>
                                     <div class='my-auto'>
-                                         <a href='verProyecto.php?id={$proyecto['id']}'><h6 class='mb-0'>{$proyecto['nombre']}</h6></a>
+                                         <a href='verProyecto.php?id={$proyecto['id']}'><h6 class='enlaces_proyectos mb-0'>{$proyecto['nombre']}</h6></a>
                                     </div>
                                 </div>
                             </td>
