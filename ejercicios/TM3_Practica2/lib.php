@@ -1,30 +1,26 @@
 <?php
 
 /**
- * Funcion para crear la baraja de cartas
- * @return void
+ * Función para crear el mazo de cartas.
+ * @return array El mazo de cartas.
  */
 function crearMazo()
 {
     $rutaCartasImg = "./cartas";
-    $baraja = array();
-    $palos = array("corazones", "diamantes", "picas", "rombos");
-    $numeros = array(1,2,3,4,5,6,7,8,9,10,11,12,13);
+    $baraja = [];
+    $palos = ["corazones", "diamantes", "picas", "rombos"];
+    $numeros = [1, 2, 3, 4, 5, 6, 7, 11, 12, 13]; // Se eliminan 8, 9 y 10 aquí
 
     foreach ($palos as $palo) {
         foreach ($numeros as $numero) {
-            if ($numero == 8 || $numero == 9 || $numero == 10) {
-                continue; // quitar 8, 9 y 10
-            }
-
             // Guardamos el valor y el nombre de cartas correspondientes
             $nombre = '';
             $valor = 0;
 
             switch ($numero) {
                 case 1:
-                    $nombre = "A"; // A
-                    $valor = 0.5;  // Valor para A
+                    $nombre = "A"; // As
+                    $valor = 0.5;  // Valor para As
                     break;
                 case 11:
                     $nombre = "J"; // J
@@ -44,8 +40,7 @@ function crearMazo()
                     break;
             }
 
-           // Comprobar que las imagenes coinciden con el tipo (corazones, diamantes, picas, rombos)
-
+            // Comprobar que las imágenes coinciden con el tipo
             $img = '';
             switch ($palo) {
                 case "corazones":
@@ -62,18 +57,72 @@ function crearMazo()
                     break;
             }
 
-            $carta = array(
+            $carta = [
                 "palo" => $palo,
                 "carta" => $nombre,
                 "img" => $img,
                 "valor" => $valor
-            );
+            ];
 
-            array_push($baraja, $carta);
+            $baraja[] = $carta; // Agregar la carta al mazo
+            barajar($baraja); // Barajar el mazo
         }
     }
     return $baraja;
+}
 
+/**
+ * Pedir una carta del mazo de cartas que se pasa por parámetro.
+ * @param array|null $mazoDeCartas
+ * @return array|null La carta pedida o null si el mazo está vacío.
+ */
+function pedirMazoDeCartas($mazoDeCartas = null) {
+    if ($mazoDeCartas === null) {
+        $mazoDeCartas = crearMazo();
+    }
+    return array_shift($mazoDeCartas); // Retorna la primera carta y la elimina del mazo
+}
+
+/**
+ * Función para determinar el ganador de la partida.
+ * @param array $cartasMostradas
+ * @return void
+ */
+function ganadorJuegoCartas($cartasMostradas) {
+    $suma = 0;
+    foreach ($cartasMostradas as $carta) {
+        $suma += $carta["valor"];
+    }
+
+    if ($suma === 7.5) {
+        header("Location: index.php?JugadorGana");
+        exit; // Siempre es bueno terminar el script después de redirigir
+    } elseif ($suma > 7.5) {
+        header("Location: index.php?JugadorPierde");
+        exit;
+    } else {
+        header("Location: index.php");
+        exit;
+    }
+}
+
+/**
+ * Reiniciar partida.
+ * @return array Un nuevo mazo de cartas y un arreglo vacío para cartas mostradas.
+ */
+function reiniciarPartida() {
+    $baraja = crearMazo();
+    $cartasMostradas = [];
+    return [$baraja, $cartasMostradas]; // Retorna el nuevo mazo y cartas mostradas
+}
+
+/**
+ * Barajar mazo de cartas.
+ * @param array $mazo
+ * @return void
+ */
+function barajar($mazo) {
+    shuffle($mazo);
 }
 
 ?>
