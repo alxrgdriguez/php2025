@@ -25,7 +25,7 @@ services:
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: toor
-      MARIADB_DATABASE: ejemplo
+      MARIADB_DATABASE: proyectosPDOTM4
       MARIADB_USER: usuario
       MARIADB_PASSWORD: usuario
     ports:
