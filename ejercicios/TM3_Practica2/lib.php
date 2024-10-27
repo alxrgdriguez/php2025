@@ -65,7 +65,6 @@ function crearMazo()
             ];
 
             $baraja[] = $carta; // Agregar la carta al mazo
-            barajar($baraja); // Barajar el mazo
         }
     }
     return $baraja;
@@ -76,29 +75,26 @@ function crearMazo()
  * @param array|null $mazoDeCartas
  * @return array|null La carta pedida o null si el mazo está vacío.
  */
-function pedirMazoDeCartas($mazoDeCartas = null) {
-    if ($mazoDeCartas === null) {
-        $mazoDeCartas = crearMazo();
-    }
-    return array_shift($mazoDeCartas); // Retorna la primera carta y la elimina del mazo
+function pedirMazoDeCartas() {
+    return array_shift($_SESSION["baraja"]); // Retorna la primera carta y la elimina del mazo
 }
 
 /**
  * Función para determinar el ganador de la partida.
- * @param array $cartasMostradas
+ * @param array $carta
  * @return void
  */
-function ganadorJuegoCartas($cartasMostradas) {
-    $suma = 0;
-    foreach ($cartasMostradas as $carta) {
-        $suma += $carta["valor"];
+function ganadorJuegoCartas($carta) {
+    if(!isset($_SESSION["puntuacion"])){
+        $_SESSION["puntuacion"] = 0;
     }
+    $_SESSION["puntuacion"] += $carta["valor"];
 
-    if ($suma === 7.5) {
-        header("Location: index.php?JugadorGana");
+    if ($_SESSION["puntuacion"] === 7.5) {
+        header("Location: index.php?resultado=JugadorGana");
         exit; // Siempre es bueno terminar el script después de redirigir
-    } elseif ($suma > 7.5) {
-        header("Location: index.php?JugadorPierde");
+    } elseif ($_SESSION["puntuacion"] > 7.5) {
+        header("Location: index.php?resultado=JugadorPierde");
         exit;
     } else {
         header("Location: index.php");
@@ -111,9 +107,16 @@ function ganadorJuegoCartas($cartasMostradas) {
  * @return array Un nuevo mazo de cartas y un arreglo vacío para cartas mostradas.
  */
 function reiniciarPartida() {
-    $baraja = crearMazo();
-    $cartasMostradas = [];
-    return [$baraja, $cartasMostradas]; // Retorna el nuevo mazo y cartas mostradas
+    $_SESSION["baraja"] = crearMazo();
+    unset($_SESSION["cartas_mostradas"]);
+    unset($_SESSION["puntuacion"]);
+
+}
+
+function reiniciarPuntuaciones() {
+    unset($_SESSION["totalPartidas"]);
+    unset($_SESSION["partidasGanadas"]);
+    unset($_SESSION["partidasPerdidas"]);
 }
 
 /**
@@ -121,8 +124,8 @@ function reiniciarPartida() {
  * @param array $mazo
  * @return void
  */
-function barajar($mazo) {
-    shuffle($mazo);
+function barajarSessionBaraja() {
+    return shuffle($_SESSION["baraja"]);
 }
 
 ?>

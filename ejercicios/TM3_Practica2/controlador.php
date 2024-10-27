@@ -14,11 +14,12 @@ if (!isset($_SESSION["cartas_mostradas"])) {
 // Procesar las acciones
 if (isset($_GET["accion"])) {
     if (strcmp($_GET["accion"], "mostrar_carta") === 0) {
-        $carta = pedirMazoDeCartas($_SESSION["baraja"]);
-        if ($carta) {
+        barajarSessionBaraja();
+        $carta = pedirMazoDeCartas();
+        if ($carta !== null) {
             $_SESSION["cartas_mostradas"][] = $carta;
             // Comprobar si hay un ganador después de mostrar la carta
-            ganadorJuegoCartas($_SESSION["cartas_mostradas"]);
+            ganadorJuegoCartas($carta);
         }
         header("Location: index.php");
         exit;
@@ -26,7 +27,15 @@ if (isset($_GET["accion"])) {
 
     // Reiniciar juego
     if (strcmp($_GET["accion"], "ReiniciarJuego") === 0) {
-        list($_SESSION["baraja"], $_SESSION["cartas_mostradas"]) = reiniciarPartida();
+        reiniciarPartida();
+        header("Location: index.php");
+        exit;
+    }
+
+    // Reiniciar juego
+    if (strcmp($_GET["accion"], "ReiniciarPuntuaciones") === 0) {
+        reiniciarPuntuaciones();
+        reiniciarPartida();
         header("Location: index.php");
         exit;
     }
