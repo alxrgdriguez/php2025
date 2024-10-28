@@ -14,10 +14,10 @@ function conectarBD() {
         // 'host' -> Este es el nombre del contenedor de MariaDB
         // Debe coincidir con el nombre que se configuró en el docker-compose
         // '3306' es el puerto predeterminado de MariaDB
-        $dsn = "mysql:host=127.0.0.1;port=3306;dbname=proyectosPDOTM4";
+        $dsn = "mysql:host=mariadb;port=3306;dbname=proyectosPDOTM4";
 
         // Creamos una nueva instancia de PDO para conectar a la base de datos
-        $dbh = new PDO($dsn, "usuario", "usuario");
+        $dbh = new PDO($dsn, "root", "toor");
 
         // Configuramos PDO para lanzar excepciones en caso de error
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -39,6 +39,7 @@ function consultarUsuarioPorEmail($email){
     $dbh = conectarBD();
 
     // stmt se refiere al objeto que permite manejar la consulta SQL de manera segura y eficiente.
+    var_dump($dbh);
     $stmt = $dbh->prepare("SELECT * FROM usuarios WHERE email = ?");
     $stmt->bindParam(1, $email);
     $stmt->setFetchMode(PDO::FETCH_ASSOC); //Nos devuelve los resultados como array asociativo
@@ -53,5 +54,47 @@ function consultarUsuarioPorEmail($email){
         return 0;
     }
 
+}
+
+/**
+ * Consular si un email ya está registrado
+ */
+function consularUsuarioEmail($email){
+
+    // Iniciamos la conexion a la base de datos
+    $dbh = conectarBD();
+
+    // stmt se refiere al objeto que permite manejar la consulta SQL de manera segura y eficiente.
+    $stmt = $dbh->prepare("SELECT * FROM usuarios WHERE email =?");
+    $stmt->bindParam(1, $email);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC); //Nos devuelve los resultados como array asociativo
+    $stmt->execute(); //La ejecución de la consulta
+
+    $dbh = null;
+
+    // Mostramos los resultados, fetch() devuelve una fila cada vez que lo llamamos
+    if ($stmt->fetch()){  //Select es sobre un campo UNIQUE solo va a devolver 1 o nada
+        return 1;
+    } else {
+        return 0;
+    }
+
+}
+
+function registrarUsuario($nombre, $email, $password){
+
+    // Conectarse a la base de datos
+    $sbh = conectarBD();
+
+    // Insertar con stmt todos los campos
+    $stmt = $sbh->prepare("INSERT INTO usuarios (nombre, email, password) VALUES (?, ?, ?)");
+
+    $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+    $stmt->bindParam(1, $nombre);
+    $stmt->bindParam(2, $email);
+    $stmt->bindParam(3, $passwordHash);
+    $stmt->execute(); //La ejecución de la consulta
+
+    $sbh = null;
 }
 

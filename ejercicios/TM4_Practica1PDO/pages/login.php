@@ -82,17 +82,17 @@ if (isset($_SESSION['usuario_conectado'])) {
                                                         <form id="registro-form" class="mb-4" action="controlador.php" method="POST">
                                                             <div class="mb-3">
                                                                 <label for="usuario-registro" class="form-label">Usuario</label>
-                                                                <input type="text" class="form-control" name="usuario" style="border: 1px solid #ced4da;" required>
+                                                                <input type="text" class="form-control" name="nombre" style="border: 1px solid #ced4da;" required>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="correo-registro" class="form-label">Correo</label>
-                                                                <input type="email" class="form-control" name="correo" style="border: 1px solid #ced4da;" required>
+                                                                <input type="email" class="form-control" name="email" style="border: 1px solid #ced4da;" required>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="contraseña-registro" class="form-label">Contraseña</label>
-                                                                <input type="password" class="form-control" minlength="8" name="contrasena" style="border: 1px solid #ced4da;" required>
+                                                                <input type="password" class="form-control" minlength="8" name="password" style="border: 1px solid #ced4da;" required>
                                                             </div>
-                                                            <button type="submit" name="registrarse" class="btn btn-primary w-100">Registrarse</button>
+                                                            <button type="submit" name="registro" class="btn btn-primary w-100">Registrarse</button>
                                                         </form>
                                                     </div>
                                                 </div>
