@@ -32,6 +32,7 @@ if(isset($_SESSION['usuario_conectado'])){
 
 <body class="g-sidenav-show  bg-gray-200">
 <?php
+print_r($_SESSION);
 if (isset($_SESSION['usuario_conectado'])) {
     include "cabecera.php";
 }

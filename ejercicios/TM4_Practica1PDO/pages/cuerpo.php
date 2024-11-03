@@ -25,14 +25,15 @@
                         </thead>
                         <tbody>
                         <?php
-                        if (isset($_SESSION['proyectos'])) {
-                            foreach ($_SESSION['proyectos'] as $proyecto) {
+
+                            foreach (consultarProyectos() as $proyecto) {
+                                $diasTranscuridos = diasTranscurridos($proyecto['fechaInicio'],$proyecto['fechaFin']);
                                 echo "
                                 <tr>
                             <td class='border-3'>
                                 <div class='d-flex px-2'>
                                     <div class='my-auto'>
-                                         <a href='verProyecto.php?id={$proyecto['id']}'><h6 class='enlaces_proyectos mb-0'>{$proyecto['nombre']}</h6></a>
+                                         <a href='verProyecto.php?id={$proyecto['idProyectos']}'><h6 class='enlaces_proyectos mb-0'>{$proyecto['nombreProyectos']}</h6></a>
                                     </div>
                                 </div>
                             </td>
@@ -43,15 +44,15 @@
                                 <p class='text-sm font-weight-bold mb-0'>{$proyecto['fechaFin']}</p>
                             </td>
                             <td class='border-3'>
-                                <p class='text-sm font-weight-bold mb-0'>{$proyecto['dias']}</p>
+                                <p class='text-sm font-weight-bold mb-0'>{$diasTranscuridos}</p>
                             </td>
                             <td class='align-middle text-center border-3'>
                                 <div class='d-flex align-items-center justify-content-center'>
-                                    <span class='me-2 text-sm font-weight-bold'>{$proyecto['estado']}</span>
+                                    <span class='me-2 text-sm font-weight-bold'>{$proyecto['estado']}%</span>
                                     <div>
                                         <div class='progress'>
                                             <div class='progress-bar bg-gradient-info' role='progressbar' aria-valuenow='60'
-                                                 aria-valuemin='0' aria-valuemax='100' style='width:{$proyecto['estado']};'></div>
+                                                 aria-valuemin='0' aria-valuemax='100' style='width:{$proyecto['estado']}%;'></div>
                                         </div>
                                     </div>
                                 </div>
@@ -59,13 +60,13 @@
 
                             <td class='border-3'>
                                 <div class='d-flex px-2 justify-content-center'>
-                                    <a href='controlador.php?accion=EliminarUnProyecto&id={$proyecto['id']}'><i class='fa-solid fa-delete-left'></i></a>
+                                    <a href='controlador.php?accion=EliminarUnProyecto&id={$proyecto['idProyectos']}'><i class='fa-solid fa-delete-left'></i></a>
                                 </div>
                             </td>
 
                         </tr>
                                 ";
-                            }
+
                         }
                         ?>
 

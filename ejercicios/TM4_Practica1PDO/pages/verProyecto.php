@@ -1,9 +1,10 @@
 <?php
+session_start();
 require "lib.php";
 if(!isset($_SESSION['usuario_conectado'])){
     header("Location: login.php");
 }
-if(!isset($_GET['id']) || recuperarProyectoPorID($_GET['id']) === 0){
+if(!isset($_GET['id'])){
     header("Location: proyectos.php");
 }
 ?>
@@ -75,7 +76,7 @@ if (isset($_SESSION['usuario_conectado'])){
                             <div class="card border rounded-3">
                                 <div class="card-body">
                                     <h6 class="card-title"><i class="fas fa-id-badge"></i> ID del Proyecto</h6>
-                                    <p class="card-text"><?php echo recuperarProyectoPorID($_GET['id'])["id"]?></p>
+                                    <p class="card-text"><?php echo recuperarProyectoPorID($_GET['id'])["idProyectos"]?></p>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +84,7 @@ if (isset($_SESSION['usuario_conectado'])){
                             <div class="card border rounded-3">
                                 <div class="card-body">
                                     <h6 class="card-title"><i class="fas fa-clipboard-list"></i> Nombre</h6>
-                                    <p class="card-text"><?php echo recuperarProyectoPorID($_GET['id'])["nombre"]?></p>
+                                    <p class="card-text"><?php echo recuperarProyectoPorID($_GET['id'])["nombreProyectos"]?></p>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +114,7 @@ if (isset($_SESSION['usuario_conectado'])){
                             <div class="card border rounded-3">
                                 <div class="card-body">
                                     <h6 class="card-title"><i class="fas fa-clock"></i> Días Transcurridos</h6>
-                                    <p class="card-text"><?php echo recuperarProyectoPorID($_GET['id'])["dias"]?></p>
+                                    <p class="card-text"><?php echo diasTranscurridos(recuperarProyectoPorID($_GET['id'])["fechaInicio"], recuperarProyectoPorID($_GET['id'])["fechaFin"])?></p>
                                 </div>
                             </div>
                         </div>
@@ -121,14 +122,14 @@ if (isset($_SESSION['usuario_conectado'])){
                             <div class="card border rounded-3">
                                 <div class="card-body">
                                     <h6 class="card-title"><i class="fas fa-tasks"></i> Estado</h6>
-                                    <p class="card-text"><?php echo recuperarProyectoPorID($_GET['id'])["estado"]?></p>
+                                    <p class="card-text"><?php echo recuperarProyectoPorID($_GET['id'])["estado"]?>%</p>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="text-center mt-4">
-                        <a href="controlador.php?accion=EliminarUnProyecto&id=1" class="btn btn-danger">Eliminar Proyecto</a>
+                        <a href="controlador.php?accion=EliminarUnProyecto&id=<?php echo recuperarProyectoPorID($_GET['id'])["idProyectos"]?>" class="btn btn-danger">Eliminar Proyecto</a>
                     </div>
                 </div>
             </div>

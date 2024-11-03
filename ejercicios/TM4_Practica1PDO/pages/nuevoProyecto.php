@@ -1,4 +1,5 @@
 <?php
+session_start();
 require "lib.php";
 if(!isset($_SESSION['usuario_conectado'])){
     header("Location: login.php");
@@ -74,12 +75,8 @@ if (isset($_SESSION['usuario_conectado'])){
                         <div class="mb-3">
                             <label for="proyecto" class="form-label">ID</label>
                             <input type="text" id="id_proyecto" name="id_proyecto" class="form-control border border-secondary shadow-sm p-2" required placeholder="ID del proyecto" value="<?php
-                                if (isset($_SESSION['proyectos'])){
-                                    echo obtenerUltimoIdProyecto() + 1;
 
-                                }else{
-                                    echo 1;
-                                }
+                                    echo obtenerUltimoIdProyecto();
                             ?>" readonly>
                         </div>
 

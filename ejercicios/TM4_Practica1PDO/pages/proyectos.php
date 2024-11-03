@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "lib.php";
 if(!isset($_SESSION['usuario_conectado'])){
     header("Location: login.php");
 }
