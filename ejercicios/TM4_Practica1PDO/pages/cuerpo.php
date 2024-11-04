@@ -25,8 +25,8 @@
                         </thead>
                         <tbody>
                         <?php
-
-                            foreach (consultarProyectos() as $proyecto) {
+                            $usuario_id = recuperarIdDelUsuario($_SESSION['usuario_conectado']['email'])['id'];
+                            foreach (consultarProyectosPorUsuario($usuario_id) as $proyecto) {
                                 $diasTranscuridos = diasTranscurridos($proyecto['fechaInicio'],$proyecto['fechaFin']);
                                 echo "
                                 <tr>

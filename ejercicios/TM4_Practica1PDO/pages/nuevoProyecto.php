@@ -101,6 +101,11 @@ if (isset($_SESSION['usuario_conectado'])){
                             <input type="number" id="estado" name="estado" class="form-control border border-secondary shadow-sm p-2" min="0" max="100" required placeholder="0 - 100">
                         </div>
 
+                        <div class="mb-3">
+                            <input type="hidden" id="idUsuario" name="id_usuario" class="form-control border border-secondary shadow-sm p-2" readonly  required value="
+                            <?php echo recuperarIdDelUsuario($_SESSION['usuario_conectado']['email'])['id']?>">
+                        </div>
+
 
 
                         <div class="d-flex justify-content-end">

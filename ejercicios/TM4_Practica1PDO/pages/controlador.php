@@ -24,10 +24,9 @@ if ($_POST){
         else{
             //Registrar usuario en BBDD
             registrarUsuario($nombre, $email, $password);
-            header("Location: registro.php?error=registrado");
 
             //Si ha funcionado bien lo metemos en la sesión
-            $_SESSION['usuario'] = array("email" => $email);
+            $_SESSION['usuario_conectado'] = array("email" => $email);
             header('Location: proyectos.php?info=registrado'); //Usuario nuevo registrado
         }
 
@@ -38,7 +37,7 @@ if ($_POST){
         $contrasena = $_POST['contrasena'];
 
         if (existeUsuario($correo, $contrasena, "logueado")){
-            $_SESSION['usuario_conectado'] = [$correo, $contrasena];
+            $_SESSION['usuario_conectado'] = ['email'=> $correo];
             header("Location: proyectos.php?info=UsuarioConectado");
         }else{
             header("Location: login.php?info=UsuarioNoExiste");
@@ -56,10 +55,11 @@ if ($_POST){
         $fecha_inicio = $_POST['fecha_inicio'];
         $fecha_fin = $_POST['fecha_fin'];
         $estado = $_POST['estado'];
+        $id_usuario = $_POST['id_usuario'];
 
 
         if (buscarProyectoPorNombre($nombre_proyecto) === 0){
-            agregarProyecto($id_proyecto, $nombre_proyecto, $fecha_inicio, $fecha_fin, $estado);
+            agregarProyecto($id_proyecto, $nombre_proyecto, $fecha_inicio, $fecha_fin, $estado, $id_usuario);
             header("Location: proyectos.php?info=ProyectoCreado");
         }else{
             header("Location: proyectos.php?info=ProyectoYaExistente");

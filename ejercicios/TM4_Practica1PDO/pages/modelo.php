@@ -114,6 +114,19 @@ function buscarProyectoPorNombre($nombre)
     }
 }
 
+function recuperarIdDelUsuario($email)
+{
+    $dbh = conectarBD();
+    $stmt = $dbh->prepare("SELECT id FROM usuarios WHERE email = ?");
+    $stmt->bindParam(1, $email);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $stmt->execute(); //La ejecución de la consulta
+
+    return $stmt->fetch();
+
+
+}
+
 
 
 
@@ -150,6 +163,19 @@ function  consultarProyectos()
 
 }
 
+function consultarProyectosPorUsuario($id_usuario)
+{
+    $dbh = conectarBD();
+    $stmt = $dbh->prepare("SELECT * FROM proyectos WHERE usuario_id = ?");
+    $stmt->bindParam(1, $id_usuario);
+    $stmt->setFetchMode(PDO::FETCH_ASSOC); // Nos devuelve los resultados como array asociativo
+    $stmt->execute(); // Ejecuta la consulta
+
+    $resultados = $stmt->fetchAll(); // Obtiene todos los resultados
+
+    return $resultados;
+}
+
 function deleteProyectofromId($id) {
     $dbh = conectarBD(); // Asegúrate de que esta función conecta correctamente a tu base de datos
     $stmt = $dbh->prepare("DELETE FROM proyectos WHERE idProyectos = ?");
@@ -180,19 +206,20 @@ function obtenerUltimoIdProyecto() {
     }
 }
 
-function agregarProyecto($idProyectos, $nombreProyecto, $fechaInicio, $fechaFin, $estado)
+function agregarProyecto($idProyectos, $nombreProyecto, $fechaInicio, $fechaFin, $estado, $id_usuario)
 {
     // Conectarse a la base de datos
     $sbh = conectarBD();
 
     // Insertar con stmt todos los campos
-    $stmt = $sbh->prepare("INSERT INTO proyectos  VALUES (?, ?, ?, ?, ?)");
+    $stmt = $sbh->prepare("INSERT INTO proyectos  VALUES (?, ?, ?, ?, ?, ?)");
 
     $stmt->bindParam(1, $idProyectos);
     $stmt->bindParam(2, $nombreProyecto);
     $stmt->bindParam(3, $fechaInicio);
     $stmt->bindParam(4, $fechaFin);
     $stmt->bindParam(5, $estado);
+    $stmt->bindParam(6, $id_usuario);
     $stmt->execute(); //La ejecución de la consulta
 
     $sbh = null;
