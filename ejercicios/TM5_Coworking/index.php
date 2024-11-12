@@ -30,10 +30,26 @@ spl_autoload_register(function ($class) {
 
 // Tratamiento de forms
 
+if (isset($_POST['registro'])){
+    $nombre = $_POST['nombreRegistro'];
+    $email = $_POST['emailRegistro'];
+    $password = $_POST['passwordRegistro'];
+    ControladorUsuarios::registro($nombre, $email, $password);
+}
 
+if (isset($_POST['login'])){
+    $email = $_POST['emailLogin'];
+    $password = $_POST['passwordLogin'];
+    ControladorUsuarios::login($email, $password);
+}
 
 
 // Tratamiento de botones, links
+
+//Login
+if (strcmp($_REQUEST["accion"], "login") == 0) {
+    ControladorUsuarios::mostrarLogin("");
+}
 
 
 
