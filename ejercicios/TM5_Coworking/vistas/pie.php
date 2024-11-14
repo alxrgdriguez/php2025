@@ -5,11 +5,11 @@
         <div>
             <a href="#">Política de privacidad</a>
             <a href="#">Términos de uso</a>
-            <a href="#">Contacto</a>
+            <a href="#">Política de Cookies</a>
         </div>
         <div class="social-icons mt-3">
-            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
             <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
     </div>

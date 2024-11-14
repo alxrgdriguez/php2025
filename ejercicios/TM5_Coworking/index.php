@@ -5,13 +5,14 @@ namespace App;
 session_start();
 //session_destroy();
 
+
 use App\modelos\Reserva;
 use App\modelos\Sala;
 use App\modelos\Usuario;
 use App\modelos\enums\EstadoReserva;
-use App\controladores\ControladorReservas;
-use App\controladores\ControladorSalas;
-use App\controladores\ControladorUsuarios;
+use App\controladores\controladorReservas;
+use App\controladores\controladorSalas;
+use App\controladores\controladorUsuarios;
 
 
 /**
@@ -28,28 +29,9 @@ spl_autoload_register(function ($class) {
 
 // ENRUTADOR - CONTROLADOR BASE
 
-// Tratamiento de forms
-
-if (isset($_POST['registro'])){
-    $nombre = $_POST['nombreRegistro'];
-    $email = $_POST['emailRegistro'];
-    $password = $_POST['passwordRegistro'];
-    ControladorUsuarios::registro($nombre, $email, $password);
-}
-
-if (isset($_POST['login'])){
-    $email = $_POST['emailLogin'];
-    $password = $_POST['passwordLogin'];
-    ControladorUsuarios::login($email, $password);
-}
-
 
 // Tratamiento de botones, links
 
-//Login
-if (strcmp($_REQUEST["accion"], "login") == 0) {
-    ControladorUsuarios::mostrarLogin("");
-}
 
 
 

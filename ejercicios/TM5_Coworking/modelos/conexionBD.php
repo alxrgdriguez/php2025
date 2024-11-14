@@ -27,12 +27,16 @@ class ConexionBD{
     }
 
     /**
-     * Get the value of conexion
+     * Cogemos la conexion a BBDD
      */
     public function getConexion()
     {
         return $this->conexion;
     }
+
+    /**
+     * Cerramos la sesión a BBDD
+     */
 
     public function cerrarConexion() {
         $this->conexion = null;
