@@ -2,7 +2,6 @@
 
 namespace App\modelos;
 
-use App\modelos\enums\EstadoReserva;
 
 class Reserva{
 
@@ -12,7 +11,7 @@ class Reserva{
     private $fecha_reserva;
     private $hora_inicio;
     private $hora_fin;
-    private EstadoReserva $estado;
+    private $estado;
 
     /**
      * @param $id
@@ -21,9 +20,9 @@ class Reserva{
      * @param $fecha_reserva
      * @param $hora_inicio
      * @param $hora_fin
-     * @param string|EstadoReserva $estado
+     * @param $estado
      */
-    public function __construct($id="", $id_usuario="", $id_sala="", $fecha_reserva="", $hora_inicio="", $hora_fin="", EstadoReserva|string $estado="")
+    public function __construct($id="", $id_usuario="", $id_sala="", $fecha_reserva="", $hora_inicio="", $hora_fin="", $estado="")
     {
         $this->id = $id;
         $this->id_usuario = $id_usuario;
@@ -94,12 +93,12 @@ class Reserva{
         $this->hora_fin = $hora_fin;
     }
 
-    public function getEstado(): EstadoReserva
+    public function getEstado()
     {
         return $this->estado;
     }
 
-    public function setEstado(EstadoReserva $estado): void
+    public function setEstado($estado)
     {
         $this->estado = $estado;
     }

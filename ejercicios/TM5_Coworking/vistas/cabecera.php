@@ -127,6 +127,18 @@
         <form class="d-flex ms-auto">
             <input class="form-control me-2 search-input" type="search" placeholder="Buscar..." aria-label="Buscar">
             <button class="btn btn-outline-light" type="submit">Buscar</button>
+            <?php
+            if (isset($_SESSION['usuario'])) {
+                echo '
+                <button class="btn btn-dark mx-3 me-2 d-flex align-items-center shadow-lg border-0 rounded-pill px-2 py-2" type="button">
+                  <i class="fas fa-user-circle fs-4 me-2"></i>
+                </button>
+                <button class="btn btn-danger me-2 px-3 mx-3" type="submit">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                </button>
+                ';
+            }
+            ?>
         </form>
     </div>
 </nav>
