@@ -33,9 +33,19 @@ spl_autoload_register(function ($class) {
 
 if($_GET){
 
+    // Cerrar Sesion
+    if(isset($_GET['accion']) && strcmp($_GET['accion'], 'cerrarSesion') == 0){
+        unset($_SESSION['usuario']);
+        controladorUsuarios::mostrarLogin();
+    }
+
+    if(isset($_GET['accion']) && strcmp($_GET['accion'], 'usuarioConectado') == 0){
+        controladorSalas::mostrarSalas("");
+    }
+
 // Tratamiento de formularios
 }elseif ($_POST){
-    if ($_POST['registro']){
+    if (isset($_POST['registro'])){
         $nombre =$_POST['nombre'];
         $email =$_POST['email'];
         $password =$_POST['password'];
@@ -45,12 +55,11 @@ if($_GET){
         controladorUsuarios::registro($usuario);
     }
 
-    if ($_POST['login']){
-        $email =$_POST['email'];
-        $password =$_POST['password'];
-        $usuario = new Usuario($email, $password);
+    if (isset($_POST['login'])){
+        $email = $_POST['email'];
+        $password = $_POST['password'];
 
-        controladorUsuarios::login($usuario);
+        controladorUsuarios::login($email, $password);
     }
 
 

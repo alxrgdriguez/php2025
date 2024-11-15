@@ -52,6 +52,21 @@ class ModeloUsuarios {
         return $stmt->fetch(PDO::FETCH_ASSOC);  // Retorna el primer registro o false si no se encuentra
     }
 
+    public static function getPassword($email){
+        $conexion = new ConexionBD();
+
+        $stmt = $conexion->getConexion()->prepare("SELECT * FROM usuarios 
+                        WHERE email = ?");
+        $stmt->bindValue(1, $email);
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Usuario');
+        $stmt->execute(); //La ejecución de la consulta
+        $usuario = $stmt->fetch();
+
+        $conexion->cerrarConexion();
+
+        return $usuario;
+    }
+
 
 
 }

@@ -77,7 +77,7 @@ class VistaLogin{
                                 <input type="submit" class="btn btn-primary w-100" name="registro" value="Registrarse">
                             </form>
                             <div class="text-center mt-3">
-                                <p>¿Ya tienes cuenta? <a href="#loginForm" class="toggle-btn">Inicia sesión aquí</a></p>
+                                <p>¿Ya tienes cuenta? <a href="#emailLogin" class="toggle-btn">Inicia sesión aquí</a></p>
                             </div>
                         </div>
                     </div>
