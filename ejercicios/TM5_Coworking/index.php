@@ -39,8 +39,9 @@ if($_GET){
         controladorUsuarios::mostrarLogin();
     }
 
-    if(isset($_GET['accion']) && strcmp($_GET['accion'], 'usuarioConectado') == 0){
-        controladorSalas::mostrarSalas("");
+    if(isset($_GET['accion']) && strcmp($_GET['accion'], 'mostrarSalas') == 0){
+
+        controladorSalas::mostrarSalas();
     }
 
 // Tratamiento de formularios
@@ -66,7 +67,7 @@ if($_GET){
 // Tratamiento para entrar al index para comprobar si tiene sesion o no
 }elseif (isset($_SESSION['usuario'])){
 
-    controladorSalas::mostrarSalas("");
+    controladorSalas::mostrarSalas();
 
 // Si no iriamos al login porque no vale la sesion
 }else{

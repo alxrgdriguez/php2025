@@ -126,6 +126,7 @@
         <!-- Barra de búsqueda -->
         <form class="d-flex ms-auto">
             <?php
+            $usuario = $_SESSION['usuario'];
             if (isset($_SESSION['usuario'])) {
                 echo '
                 <input class="form-control me-2 search-input" type="search" placeholder="Buscar..." aria-label="Buscar">

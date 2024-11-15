@@ -8,10 +8,13 @@ use App\vistas\VistaLogin;
 
 class controladorSalas{
 
-
-    public static function mostrarSalas($error)
-    {
-        $salas = ModeloSalas::mostrarSalasDisponibles();
+    /**
+     * Metodo que muestra todos los salas
+     */
+    public static function mostrarSalas(){
+        $salas = ModeloSalas::mostrarTodasLasSalas();
         VistaSalas::render($salas);
     }
+
+
 }

@@ -5,6 +5,7 @@ namespace App\controladores;
 use App\modelos\ModeloUsuarios;
 use App\modelos\Usuario;
 use App\vistas\VistaLogin;
+use App\vistas\VistaSalas;
 
 class controladorUsuarios{
 
@@ -33,7 +34,7 @@ class controladorUsuarios{
 
         if (password_verify($password, $usuario->getPassword())) {
             $_SESSION['usuario'] = $usuario->getEmail();
-            header("Location: index.php?accion=UsuarioConectado");
+            header("Location: index.php?accion=mostrarSalas");
         } else {
             ControladorUsuarios::mostrarLogin("Error login");
         }

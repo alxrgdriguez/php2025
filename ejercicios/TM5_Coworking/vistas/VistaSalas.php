@@ -2,49 +2,53 @@
 
 namespace App\vistas;
 
-class VistaSalas{
-    public static function render($salas){
+class VistaSalas {
+    public static function render($salas) {
         include("cabecera.php");
         ?>
+
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
-                    <div class="card mb-4">
-                        <div class="card-header pb-0">
+                    <div class="card mb-4 shadow-lg">
+                        <div class="card-header border-0 text-black-50 text-center">
                             <h3>Salas Disponibles</h3>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
-
-                                <table class="table align-items-center justify-content-center mb-0">
+                                <table class="table table-striped table-hover align-items-center mx-auto mb-0" style="width: 80%;"> <!-- Centrado de la tabla -->
                                     <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Capacidad</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Ubicacion</th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Reserva</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Nombre</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Capacidad</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Ubicación</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Reserva</th> <!-- Alineación de encabezado -->
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    foreach($salas as $sala) {
+                                    foreach ($salas as $sala) {
                                         ?>
-                                        <tr>
-                                            <td>
+                                        <tr class="align-middle">
+                                            <td class="align-middle text-start">
                                                 <div class="d-flex px-2">
                                                     <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm"><?= $sala->getNombre(); ?></h6>
+                                                        <h6 class="mb-0 text-sm"><?= $sala->getNombre() ?></h6>
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>
-                                                <p class="text-sm font-weight-bold mb-0"><?= $sala->getCapacidad(); ?></p>
-                                            </td>
-                                            <td>
-                                                <span class="text-xs font-weight-bold"><?= $sala->getUbicacion(); ?></span>
+                                            <td class="align-middle text-center">
+                                                <p class="text-sm font-weight-bold mb-0"><?= $sala->getCapacidad() ?></p>
                                             </td>
                                             <td class="align-middle text-center">
-                                                <a class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalReserva">Realizar Reserva</a>
+                                                <span class="text-xs font-weight-bold"><?= $sala->getUbicacion() ?></span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <a class="btn btn-success btn-sm px-4 py-2 rounded-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalReserva">
+                                                        <i class="bi bi-calendar-check"></i> Realizar Reserva
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                         <?php
@@ -52,16 +56,14 @@ class VistaSalas{
                                     ?>
                                     </tbody>
                                 </table>
-
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <?php
-        include ("pie.php");
+        include("pie.php");
     }
 }
-
-

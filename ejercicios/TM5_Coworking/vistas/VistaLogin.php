@@ -64,7 +64,7 @@ class VistaLogin{
                                     <label for="passwordRegister" class="form-label">Contraseña</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-lock icon"></i></span>
-                                        <input type="password" class="form-control" id="passwordRegister" name="password" placeholder="Ingresa tu contraseña" required>
+                                        <input type="password" class="form-control" minlength="8" id="passwordRegister" name="password" placeholder="Ingresa tu contraseña" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">
