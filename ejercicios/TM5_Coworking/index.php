@@ -33,14 +33,19 @@ spl_autoload_register(function ($class) {
 
 if($_GET){
 
+    // Usuario existe
+    if(isset($_GET['accion']) && strcmp($_GET['accion'], 'usuarioExiste') == 0){
+        controladorUsuarios::mostrarLogin();
+    }
+
     // Cerrar Sesion
     if(isset($_GET['accion']) && strcmp($_GET['accion'], 'cerrarSesion') == 0){
         unset($_SESSION['usuario']);
         controladorUsuarios::mostrarLogin();
     }
 
+    // Mostrar Salas
     if(isset($_GET['accion']) && strcmp($_GET['accion'], 'mostrarSalas') == 0){
-
         controladorSalas::mostrarSalas();
     }
 
