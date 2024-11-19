@@ -35,13 +35,13 @@ if($_GET){
 
     // Usuario existe
     if(isset($_GET['accion']) && strcmp($_GET['accion'], 'usuarioExiste') == 0){
-        controladorUsuarios::mostrarLogin();
+        controladorUsuarios::mostrarLogin("");
     }
 
     // Cerrar Sesion
     if(isset($_GET['accion']) && strcmp($_GET['accion'], 'cerrarSesion') == 0){
         unset($_SESSION['usuario']);
-        controladorUsuarios::mostrarLogin();
+        controladorUsuarios::mostrarLogin("");
     }
 
     // Mostrar Salas
@@ -70,16 +70,15 @@ if($_GET){
 
 
 // Tratamiento para entrar al index para comprobar si tiene sesion o no
-}elseif (isset($_SESSION['usuario'])){
-
-    controladorSalas::mostrarSalas();
-
-// Si no iriamos al login porque no vale la sesion
-}else{
-
-    controladorUsuarios::mostrarLogin();
-}
-
+}else
+        //Página de inicio
+        if (isset($_SESSION['usuario'])) {
+            //Inicio de la app
+            controladorSalas::mostrarSalas();
+        } else {
+            //Formulario de login
+            ControladorUsuarios::mostrarLogin("");
+        }
 
 
 

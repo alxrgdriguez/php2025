@@ -47,6 +47,11 @@ class VistaLogin{
                         <div class="card-body">
                             <form method="POST" action="index.php">
                                 <div class="mb-3">
+                                    <?php
+                                    if (strlen($error) > 0) {
+                                        echo "<p class='text-danger'>{$error}</p>";
+                                    }
+                                    ?>
                                     <label for="nombreRegistro" class="form-label">Nombre</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-user icon"></i></span>

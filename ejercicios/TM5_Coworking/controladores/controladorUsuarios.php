@@ -33,17 +33,21 @@ class controladorUsuarios{
         $usuario = ModeloUsuarios::getPassword($email);
 
         if (password_verify($password, $usuario->getPassword())) {
-            $_SESSION['usuario'] = $usuario->getEmail();
+            $_SESSION['usuario'] = array(
+                'id' => $usuario->getId(),
+                'email' => $usuario->getEmail(),
+                'nombre' => $usuario->getNombre()
+            );
             header("Location: index.php?accion=mostrarSalas");
         } else {
-            ControladorUsuarios::mostrarLogin("Error login");
+            controladorUsuarios::mostrarLogin("Este usuario ya existe");
         }
     }
 
 
-    public static function mostrarLogin()
-    {
-        VistaLogin::render("");
+
+    public static function mostrarLogin($error) {
+        VistaLogin::render($error);
     }
 
 
