@@ -26,6 +26,23 @@ class ModeloReservas{
             return $nombre;
         }
     }
+
+    public static function mostrarReservasPorNombreSala($nombreSala)
+    {
+        $conexion = new ConexionBD();
+
+        $stmt= $conexion->getConexion()->prepare("SELECT * FROM reservas
+                        WHERE nombre_sala= ? AND estado='confirmada'");
+        $stmt->bindValue(1, $nombreSala);
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Reserva');
+        $stmt->execute();
+        $reservas = $stmt->fetchAll();
+
+        $conexion->cerrarConexion();
+
+        return $reservas;
+
+    }
 }
 
 

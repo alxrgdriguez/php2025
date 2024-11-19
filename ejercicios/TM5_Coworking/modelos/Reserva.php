@@ -7,7 +7,7 @@ class Reserva{
 
     private $id;
     private $correo_usuario;
-    private $id_sala;
+    private $nombre_sala;
     private $fecha_reserva;
     private $hora_inicio;
     private $hora_fin;
@@ -16,17 +16,17 @@ class Reserva{
     /**
      * @param $id
      * @param $correo_usuario
-     * @param $id_sala
+     * @param $nombre_sala
      * @param $fecha_reserva
      * @param $hora_inicio
      * @param $hora_fin
      * @param $estado
      */
-    public function __construct($id="", $correo_usuario="", $id_sala="", $fecha_reserva="", $hora_inicio="", $hora_fin="", $estado="")
+    public function __construct($id="", $correo_usuario="", $nombre_sala="", $fecha_reserva="", $hora_inicio="", $hora_fin="", $estado="")
     {
         $this->id = $id;
         $this->correo_usuario = $correo_usuario;
-        $this->id_sala = $id_sala;
+        $this->nombre_sala = $nombre_sala;
         $this->fecha_reserva = $fecha_reserva;
         $this->hora_inicio = $hora_inicio;
         $this->hora_fin = $hora_fin;
@@ -53,14 +53,14 @@ class Reserva{
         $this->correo_usuario = $correo_usuario;
     }
 
-    public function getIdSala(): mixed
+    public function getNombreSala(): mixed
     {
-        return $this->id_sala;
+        return $this->nombre_sala;
     }
 
-    public function setIdSala(mixed $id_sala): void
+    public function setNombreSala(mixed $nombre_sala): void
     {
-        $this->id_sala = $id_sala;
+        $this->nombre_sala = $nombre_sala;
     }
 
     public function getFechaReserva(): mixed

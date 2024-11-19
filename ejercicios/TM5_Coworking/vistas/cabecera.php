@@ -153,7 +153,7 @@ if (isset($_SESSION['usuario'])) {
     <div class="container-fluid">
         <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-home"></i> Salas Disponibles</a>
+                <a class="nav-link" href="index.php"><i class="fas fa-home"></i> Salas Disponibles</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-calendar-check"></i> Mis Reservas</a>

@@ -51,7 +51,7 @@ if($_GET){
             controladorSalas::mostrarSalas();
         }
         if (isset($_GET['accion']) && strcmp($_GET['accion'], 'verReservas') == 0) {
-            controladorReservas::mostrarReservas();
+            controladorReservas::mostrarReservas($_GET["nombreSala"]);
         }
     }else{
         ControladorUsuarios::mostrarLogin("");
