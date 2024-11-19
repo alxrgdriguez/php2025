@@ -18,6 +18,11 @@ class VistaLogin{
                         <div class="card-body">
                             <form method="POST" action="index.php">
                                 <div class="mb-3">
+                                    <?php
+                                    if ($error === "Este usuario no existe") {
+                                        echo "<p class='text-danger'>{$error}</p>";
+                                    }
+                                    ?>
                                     <label for="emailLogin" class="form-label">Correo electrónico</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-envelope icon"></i></span>
@@ -48,7 +53,7 @@ class VistaLogin{
                             <form method="POST" action="index.php">
                                 <div class="mb-3">
                                     <?php
-                                    if (strlen($error) > 0) {
+                                    if ($error === "Este usuario ya existe") {
                                         echo "<p class='text-danger'>{$error}</p>";
                                     }
                                     ?>

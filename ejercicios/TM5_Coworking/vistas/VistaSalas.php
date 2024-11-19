@@ -45,8 +45,8 @@ class VistaSalas {
                                             </td>
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-center align-items-center">
-                                                    <a class="btn btn-success btn-sm px-4 py-2 rounded-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalReserva">
-                                                        <i class="bi bi-calendar-check"></i> Realizar Reserva
+                                                    <a href="index.php?accion=verReservas&id=?<?= $sala->getNombre() ?>" class="btn btn-success btn-sm px-4 py-2 rounded-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalReserva">
+                                                        <i class="bi bi-calendar-check"></i> Ver Reservas
                                                     </a>
                                                 </div>
                                             </td>

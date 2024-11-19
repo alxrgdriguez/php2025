@@ -34,25 +34,8 @@ class ModeloUsuarios {
         return $stmt->rowCount() == 1;
     }
 
-    public static function obtenerUsuarioPorEmail($usuario)
-    {
-        // Conexión a la base de datos
-        $conexion = new ConexionBD();
 
-        // Obtener el email del usuario
-        $email = $usuario->getEmail();
-
-        // Consulta para obtener al usuario por su email
-        $stmt = $conexion->getConexion()->prepare("SELECT * FROM usuarios WHERE email = ?");
-        $stmt->bindValue(1, $email);
-        $stmt->execute();
-        $conexion->cerrarConexion();
-
-        // Retorna el primer resultado encontrado
-        return $stmt->fetch(PDO::FETCH_ASSOC);  // Retorna el primer registro o false si no se encuentra
-    }
-
-    public static function getPassword($email){
+    public static function obtenerUsuarioPorEmail($email){
         $conexion = new ConexionBD();
 
         $stmt = $conexion->getConexion()->prepare("SELECT * FROM usuarios 
@@ -64,7 +47,11 @@ class ModeloUsuarios {
 
         $conexion->cerrarConexion();
 
-        return $usuario;
+        if($stmt->rowCount() == 0){//Si no hay resultados, devuelve null
+            return null;
+        }else{
+            return $usuario;
+        }
     }
 
 

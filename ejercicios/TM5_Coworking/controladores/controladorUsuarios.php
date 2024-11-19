@@ -14,7 +14,7 @@ class controladorUsuarios{
     {
        $usuarioExiste = ModeloUsuarios::usuarioExiste($usuario);
        if($usuarioExiste){
-           header("Location: index.php?accion=mostrarLogin&info=usuarioExiste");
+           controladorUsuarios::mostrarLogin("Este usuario ya existe");
            exit();
        }
 
@@ -30,7 +30,12 @@ class controladorUsuarios{
     }
 
     public static function login($email, $password) {
-        $usuario = ModeloUsuarios::getPassword($email);
+
+        $usuario = ModeloUsuarios::obtenerUsuarioPorEmail($email);
+        if($usuario === null){
+            controladorUsuarios::mostrarLogin("Este usuario no existe");
+            exit();
+        }
 
         if (password_verify($password, $usuario->getPassword())) {
             $_SESSION['usuario'] = array(

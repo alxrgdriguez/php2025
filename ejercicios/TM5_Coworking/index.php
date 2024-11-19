@@ -44,11 +44,17 @@ if($_GET){
         controladorUsuarios::mostrarLogin("");
     }
 
-    // Mostrar Salas
-    if(isset($_GET['accion']) && strcmp($_GET['accion'], 'mostrarSalas') == 0){
-        controladorSalas::mostrarSalas();
+    if(isset($_SESSION['usuario'])){
+        // Mostrar Salas
+        if(isset($_GET['accion']) && strcmp($_GET['accion'], 'mostrarSalas') == 0){
+            controladorSalas::mostrarSalas();
+        }
+        if (isset($_GET['accion']) && strcmp($_GET['accion'], 'verReservas') == 0) {
+            controladorReservas::mostrarReservas();
+        }
+    }else{
+        ControladorUsuarios::mostrarLogin("");
     }
-
 // Tratamiento de formularios
 }elseif ($_POST){
     if (isset($_POST['registro'])){
