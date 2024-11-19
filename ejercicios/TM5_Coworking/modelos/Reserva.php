@@ -6,7 +6,7 @@ namespace App\modelos;
 class Reserva{
 
     private $id;
-    private $id_usuario;
+    private $correo_usuario;
     private $id_sala;
     private $fecha_reserva;
     private $hora_inicio;
@@ -15,17 +15,17 @@ class Reserva{
 
     /**
      * @param $id
-     * @param $id_usuario
+     * @param $correo_usuario
      * @param $id_sala
      * @param $fecha_reserva
      * @param $hora_inicio
      * @param $hora_fin
      * @param $estado
      */
-    public function __construct($id="", $id_usuario="", $id_sala="", $fecha_reserva="", $hora_inicio="", $hora_fin="", $estado="")
+    public function __construct($id="", $correo_usuario="", $id_sala="", $fecha_reserva="", $hora_inicio="", $hora_fin="", $estado="")
     {
         $this->id = $id;
-        $this->id_usuario = $id_usuario;
+        $this->correo_usuario = $correo_usuario;
         $this->id_sala = $id_sala;
         $this->fecha_reserva = $fecha_reserva;
         $this->hora_inicio = $hora_inicio;
@@ -43,14 +43,14 @@ class Reserva{
         $this->id = $id;
     }
 
-    public function getIdUsuario(): mixed
+    public function getCorreoUsuario(): mixed
     {
-        return $this->id_usuario;
+        return $this->correo_usuario;
     }
 
-    public function setIdUsuario(mixed $id_usuario): void
+    public function setCorreoUsuario(mixed $correo_usuario): void
     {
-        $this->id_usuario = $id_usuario;
+        $this->correo_usuario = $correo_usuario;
     }
 
     public function getIdSala(): mixed

@@ -24,7 +24,7 @@ class controladorUsuarios{
        $usuarioId =ModeloUsuarios::registrarUsuario($usuario);
        if($usuarioId){
            $_SESSION['usuario'] = array('id' => $usuarioId, 'email' => $usuario->getEmail());
-           header("Location: index.php");
+           header("Location: index.php?accion=mostrarSalas");
            exit();
        }
     }
@@ -39,9 +39,8 @@ class controladorUsuarios{
 
         if (password_verify($password, $usuario->getPassword())) {
             $_SESSION['usuario'] = array(
-                'id' => $usuario->getId(),
                 'email' => $usuario->getEmail(),
-                'nombre' => $usuario->getNombre()
+                'nombre_usuario' => $usuario->getNombreUsuario()
             );
             header("Location: index.php?accion=mostrarSalas");
         } else {

@@ -81,7 +81,7 @@ class VistaLogin{
                                     <label for="telefonoRegister" class="form-label">Teléfono</label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-phone-alt icon"></i></span>
-                                        <input type="tel" class="form-control" minlength="9" maxlength="9" id="telefonoRegister" name="telefono" placeholder="Ingresa tu teléfono" required>
+                                        <input type="tel" pattern="^[0-9]{9}$" class="form-control" minlength="9" maxlength="9" id="telefonoRegister" name="telefono" placeholder="Ingresa tu teléfono" required>
                                     </div>
                                 </div>
                                 <input type="submit" class="btn btn-primary w-100" name="registro" value="Registrarse">

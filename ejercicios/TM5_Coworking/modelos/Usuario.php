@@ -4,61 +4,44 @@ namespace App\modelos;
 
 class Usuario{
 
-    private $id;
-    private $nombre;
     private $email;
+    private $nombre_usuario;
     private $password;
     private $telefono;
     private $fecha_creacion;
 
     /**
      * @param $id
-     * @param $nombre
+     * @param $nombre_usuario
      * @param $email
      * @param $password
      * @param $telefono
      * @param $fecha_creacion
      */
-    public function __construct($id="", $nombre="", $email="", $password="", $telefono="", $fecha_creacion="")
+    public function __construct($email="", $nombre_usuario="",  $password="", $telefono="", $fecha_creacion="")
     {
-        $this->id = $id;
-        $this->nombre = $nombre;
         $this->email = $email;
+        $this->nombre_usuario = $nombre_usuario;
         $this->password = $password;
         $this->telefono = $telefono;
         $this->fecha_creacion = $fecha_creacion;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return mixed
      */
-    public function getNombre()
+    public function getNombreUsuario()
     {
-        return $this->nombre;
+        return $this->nombre_usuario;
     }
 
     /**
-     * @param mixed $nombre
+     * @param mixed $nombre_usuario
      */
-    public function setNombre($nombre)
+    public function setNombreUsuario($nombre_usuario)
     {
-        $this->nombre = $nombre;
+        $this->nombre_usuario = $nombre_usuario;
     }
 
     /**

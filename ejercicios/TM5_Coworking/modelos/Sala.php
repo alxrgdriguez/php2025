@@ -5,20 +5,20 @@ namespace App\modelos;
 class Sala{
 
     private $id;
-    private $nombre;
+    private $nombre_sala;
     private $capacidad;
     private $ubicacion;
 
     /**
      * @param $id
-     * @param $nombre
+     * @param $nombre_sala
      * @param $capacidad
      * @param $ubicacion
      */
-    public function __construct($id="", $nombre="", $capacidad="", $ubicacion="")
+    public function __construct($id="", $nombre_sala="", $capacidad="", $ubicacion="")
     {
         $this->id = $id;
-        $this->nombre = $nombre;
+        $this->nombre_sala = $nombre_sala;
         $this->capacidad = $capacidad;
         $this->ubicacion = $ubicacion;
     }
@@ -42,17 +42,17 @@ class Sala{
     /**
      * @return mixed|string
      */
-    public function getNombre()
+    public function getNombreSala()
     {
-        return $this->nombre;
+        return $this->nombre_sala;
     }
 
     /**
-     * @param mixed|string $nombre
+     * @param mixed|string $nombre_sala
      */
-    public function setNombre($nombre)
+    public function setNombreSala($nombre_sala)
     {
-        $this->nombre = $nombre;
+        $this->nombre_sala = $nombre_sala;
     }
 
     /**

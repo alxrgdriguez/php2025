@@ -42,6 +42,7 @@ if($_GET){
     if(isset($_GET['accion']) && strcmp($_GET['accion'], 'cerrarSesion') == 0){
         unset($_SESSION['usuario']);
         controladorUsuarios::mostrarLogin("");
+        exit();
     }
 
     if(isset($_SESSION['usuario'])){
@@ -62,7 +63,7 @@ if($_GET){
         $email =$_POST['email'];
         $password =$_POST['password'];
         $telefono =$_POST['telefono'];
-        $usuario = new Usuario(0, $nombre, $email, $password, $telefono, "");
+        $usuario = new Usuario($email, $nombre, $password, $telefono, "");
 
         controladorUsuarios::registro($usuario);
     }

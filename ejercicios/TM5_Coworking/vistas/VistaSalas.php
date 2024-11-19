@@ -33,7 +33,7 @@ class VistaSalas {
                                             <td class="align-middle text-start">
                                                 <div class="d-flex px-2">
                                                     <div class="my-auto">
-                                                        <h6 class="mb-0 text-sm"><?= $sala->getNombre() ?></h6>
+                                                        <h6 class="mb-0 text-sm"><?= $sala->getNombreSala() ?></h6>
                                                     </div>
                                                 </div>
                                             </td>
@@ -45,7 +45,7 @@ class VistaSalas {
                                             </td>
                                             <td class="align-middle text-center">
                                                 <div class="d-flex justify-content-center align-items-center">
-                                                    <a href="index.php?accion=verReservas&id=?<?= $sala->getNombre() ?>" class="btn btn-success btn-sm px-4 py-2 rounded-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalReserva">
+                                                    <a href="index.php?accion=verReservas&nombreSala=?<?= $sala->getNombreSala() ?>" class="btn btn-success btn-sm px-4 py-2 rounded-3 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalReserva">
                                                         <i class="bi bi-calendar-check"></i> Ver Reservas
                                                     </a>
                                                 </div>

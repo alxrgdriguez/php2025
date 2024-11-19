@@ -10,13 +10,13 @@ class ModeloUsuarios {
     public static function registrarUsuario($usuario)
     {
         $conexion = new ConexionBD();
-        $stmt= $conexion->getConexion()->prepare("INSERT INTO usuarios(nombre, email, password, telefono) VALUES (?,?,?,?)");
-        $stmt->bindValue(1, $usuario->getNombre());
-        $stmt->bindValue(2, $usuario->getEmail());
+        $stmt= $conexion->getConexion()->prepare("INSERT INTO usuarios(email, nombre_usuario, password, telefono) VALUES (?,?,?,?)");
+        $stmt->bindValue(1, $usuario->getEmail());
+        $stmt->bindValue(2, $usuario->getNombreUsuario());
         $stmt->bindValue(3, $usuario->getPassword());
         $stmt->bindValue(4, $usuario->getTelefono());
         $stmt->execute();
-        $idSesion = $conexion->getConexion()->lastInsertId();
+        $idSesion = $usuario->getEmail();
         $conexion->cerrarConexion();
         // Si es uno se ha insertado en base de datos
         return $idSesion;
