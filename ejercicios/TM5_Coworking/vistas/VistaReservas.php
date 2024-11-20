@@ -20,7 +20,7 @@ class VistaReservas{
                                 <table class="table table-striped table-hover align-items-center mx-auto mb-0" style="width: 80%;"> <!-- Centrado de la tabla -->
                                     <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Correo</th>
+                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Correo Usuario</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Fecha Reserva</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Hora Inicio</th>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 text-center">Hora Fin</th>

@@ -75,6 +75,17 @@ if($_GET){
         controladorUsuarios::login($email, $password);
     }
 
+    if (isset($_POST['guardarReserva'])){
+        $correoUsuario = $_POST['correo_usuario'];
+        $nombreSala = $_POST['nombre_sala'];
+        $fechaReserva = $_POST['fecha_reserva'];
+        $horaInicio = $_POST['hora_inicio'];
+        $horaFin = $_POST['hora_fin'];
+        $estado = $_POST['estado'];
+
+        controladorReservas::crearReserva($nombreSala);
+    }
+
 
 // Tratamiento para entrar al index para comprobar si tiene sesion o no
 }else
@@ -82,9 +93,10 @@ if($_GET){
         if (isset($_SESSION['usuario'])) {
             //Inicio de la app
             controladorSalas::mostrarSalas();
+
         } else {
             //Formulario de login
-            ControladorUsuarios::mostrarLogin("");
+            controladorUsuarios::mostrarLogin("");
         }
 
 

@@ -13,15 +13,35 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
+        /* Configura el body para usar flexbox y organizar la página de arriba a abajo */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Asegura que la página ocupe toda la altura disponible */
+        }
+
+        /* El contenido principal ocupará el espacio disponible entre la cabecera y el footer */
+        .main-content {
+            flex: 1;  /* Hace que este contenedor ocupe el espacio restante */
+        }
+
+        /* Estilos adicionales para el pie de página */
+        footer {
+            background-color: #343a40; /* Fondo oscuro */
+            color: white;
+            padding: 40px 0;
+            margin-top: auto;  /* Empuja el pie de página al final */
+        }
         .navbar {
             background-color: #0056b3; /* Color de fondo profesional */
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
         .navbar-brand {
             font-weight: bold;
-            font-size: 2rem;
-            font-family: 'Arial', sans-serif;
-            color: #fff;
+            font-size: 2.5rem;
+            font-family: 'system-ui';
+            color: white;
+            letter-spacing: 2px;
         }
         .search-input {
             width: 300px;
@@ -81,19 +101,19 @@
         }
         .navbar-nav .nav-item .nav-link {
             color: white !important;
+            font-size: 22px !important;
             font-weight: 600;
+        }
+
+        .navbar-nav{
+            display: flex;
+            gap: 20px;
         }
         .navbar-nav .nav-item .nav-link:hover {
             color: #f8f9fa !important;
             text-decoration: underline;
         }
 
-        /* Estilos del Footer */
-        footer {
-            background-color: #343a40; /* Fondo oscuro */
-            color: white;
-            padding: 40px 0;
-        }
         footer a {
             color: #fff;
             text-decoration: none;
@@ -156,7 +176,11 @@ if (isset($_SESSION['usuario'])) {
                 <a class="nav-link" href="index.php"><i class="fas fa-home"></i> Salas Disponibles</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-phone"></i> Crear Reserva</a>
+             </li>
+            <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-calendar-check"></i> Mis Reservas</a>
+             </li>
         </ul>
     </div>
 </nav>

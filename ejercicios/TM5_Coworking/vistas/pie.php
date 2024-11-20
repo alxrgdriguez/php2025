@@ -18,4 +18,3 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq0p6T0tG0zww5+3gDZDZG8ZJrWnZTl4WyRfqSgZrr41htw+ey" crossorigin="anonymous"></script>
 </body>
 </html>
-

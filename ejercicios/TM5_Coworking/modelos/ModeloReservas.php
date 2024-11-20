@@ -43,6 +43,10 @@ class ModeloReservas{
         return $reservas;
 
     }
+
+    public static function crearReserva($idSala, $correoUsuario, $fechaReserva, $horaInicio, $horaFin, $estado)
+    {
+    }
 }
 
 
