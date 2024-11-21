@@ -36,7 +36,7 @@ class VistaLogin{
                                         <input type="password" class="form-control" id="passwordLogin" name="password" placeholder="Ingresa tu contraseña" required>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100" >Iniciar sesión</button>
+                                <button type="submit" name="login" class="btn btn-primary w-100" >Iniciar sesión</button>
                             </form>
                             <div class="text-center mt-3">
                                 <p>¿No tienes cuenta? <a href="#registerForm" class="toggle-btn">Regístrate aquí</a></p>

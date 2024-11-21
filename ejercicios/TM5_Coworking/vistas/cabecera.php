@@ -176,7 +176,7 @@ if (isset($_SESSION['usuario'])) {
                 <a class="nav-link" href="index.php"><i class="fas fa-home"></i> Salas Disponibles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-phone"></i> Crear Reserva</a>
+                <a class="nav-link" href="index.php?accion=VistaCrearReserva"><i class="fas fa-phone"></i> Crear Reserva</a>
              </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="fas fa-calendar-check"></i> Mis Reservas</a>

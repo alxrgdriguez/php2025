@@ -4,39 +4,20 @@ namespace App\modelos;
 
 class Sala{
 
-    private $id;
     private $nombre_sala;
     private $capacidad;
     private $ubicacion;
 
     /**
-     * @param $id
      * @param $nombre_sala
      * @param $capacidad
      * @param $ubicacion
      */
-    public function __construct($id="", $nombre_sala="", $capacidad="", $ubicacion="")
+    public function __construct( $nombre_sala="", $capacidad="", $ubicacion="")
     {
-        $this->id = $id;
         $this->nombre_sala = $nombre_sala;
         $this->capacidad = $capacidad;
         $this->ubicacion = $ubicacion;
-    }
-
-    /**
-     * @return mixed|string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed|string $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

@@ -50,9 +50,18 @@ if($_GET){
         if(isset($_GET['accion']) && strcmp($_GET['accion'], 'mostrarSalas') == 0){
             controladorSalas::mostrarSalas();
         }
+
         if (isset($_GET['accion']) && strcmp($_GET['accion'], 'verReservas') == 0) {
             controladorReservas::mostrarReservas($_GET["nombreSala"]);
         }
+        if (isset($_GET['accion']) && strcmp($_GET['accion'], 'VistaCrearReserva') == 0) {
+            controladorReservas::mostrarCrearReserva();
+        }
+
+        if (isset($_GET['accion']) && strcmp($_GET['accion'], 'cancelarReserva') == 0) {
+            controladorReservas::cancelarReserva($_GET["id"]);
+        }
+
     }else{
         ControladorUsuarios::mostrarLogin("");
     }
@@ -71,19 +80,19 @@ if($_GET){
     if (isset($_POST['login'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
-
         controladorUsuarios::login($email, $password);
     }
 
-    if (isset($_POST['guardarReserva'])){
-        $correoUsuario = $_POST['correo_usuario'];
+    if (isset($_POST['crear_reserva'])){
+        $correoUsuario = $_SESSION['usuario']['email'];
         $nombreSala = $_POST['nombre_sala'];
         $fechaReserva = $_POST['fecha_reserva'];
-        $horaInicio = $_POST['hora_inicio'];
-        $horaFin = $_POST['hora_fin'];
-        $estado = $_POST['estado'];
+        $horaInicio = $_POST['hora_inicio_reserva'].":00:00";
+        $horaFin = $_POST['hora_fin_reserva'].":00:00";
+        $reserva = new Reserva(null, $correoUsuario, $nombreSala, $fechaReserva, $horaInicio, $horaFin, "confirmada");
+        controladorReservas::crearReserva($reserva);
 
-        controladorReservas::crearReserva($nombreSala);
+
     }
 
 

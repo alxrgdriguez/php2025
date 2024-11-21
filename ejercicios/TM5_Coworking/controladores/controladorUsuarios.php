@@ -30,7 +30,6 @@ class controladorUsuarios{
     }
 
     public static function login($email, $password) {
-
         $usuario = ModeloUsuarios::obtenerUsuarioPorEmail($email);
         if($usuario === null){
             controladorUsuarios::mostrarLogin("Este usuario no existe");
