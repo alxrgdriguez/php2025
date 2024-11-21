@@ -117,6 +117,21 @@ class ModeloReservas{
         $conexion->cerrarConexion();
 
     }
+
+    public static function obtenerReservasPorEmail($email){
+        $conexion = new ConexionBD();
+
+        $stmt= $conexion->getConexion()->prepare("SELECT * FROM reservas
+                        WHERE correo_usuario= ? AND estado='confirmada'");
+        $stmt->bindValue(1, $email);
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Reserva');
+        $stmt->execute();
+        $reservas = $stmt->fetchAll();
+
+        $conexion->cerrarConexion();
+
+        return $reservas;
+    }
 }
 
 

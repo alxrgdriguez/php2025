@@ -61,6 +61,9 @@ if($_GET){
         if (isset($_GET['accion']) && strcmp($_GET['accion'], 'cancelarReserva') == 0) {
             controladorReservas::cancelarReserva($_GET["id"]);
         }
+        if (isset($_GET['accion']) && strcmp($_GET['accion'], 'VistaMiReservas') == 0) {
+            controladorReservas::mostrarMisReservas($_SESSION["usuario"]["email"]);
+        }
 
     }else{
         ControladorUsuarios::mostrarLogin("");

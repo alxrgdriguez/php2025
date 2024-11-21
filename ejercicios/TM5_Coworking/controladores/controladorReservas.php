@@ -6,6 +6,7 @@ use App\modelos\ModeloReservas;
 use App\modelos\ModeloSalas;
 use App\modelos\Reserva;
 use App\vistas\VistaCrearReserva;
+use App\vistas\VistaMisReservas;
 use App\vistas\VistaReservas;
 use App\vistas\VistaSalas;
 
@@ -23,6 +24,13 @@ class controladorReservas{
         $salas = ModeloSalas::obtenerNombreSalas();
         VistaCrearReserva::render($salas, "");
   }
+
+  public static function mostrarMisReservas($email){
+
+    // mostrar vista de crear reserva
+    $reservas = ModeloReservas::obtenerReservasPorEmail($email);
+    VistaMisReservas::render($reservas);
+    }
 
   public static function crearReserva($reserva){
 

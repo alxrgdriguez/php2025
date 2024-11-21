@@ -13,7 +13,6 @@ class VistaCrearReserva {
             <?php
             if ($error !== "") {
                 echo "<p class='text-danger'>{$error}</p>";
-
             }
             ?>
             <form method="POST" action="index.php">

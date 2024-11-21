@@ -149,8 +149,7 @@
             if (isset($_SESSION['usuario'])) {
                 $nombreUsuario = $_SESSION['usuario']['email'];
                 echo '
-                    <input class="form-control me-2 search-input" type="search" placeholder="Buscar..." aria-label="Buscar">
-                    <button class="btn btn-outline-light" type="submit">Buscar</button>
+                    
                     <div class="d-flex align-items-center">
                         <button class="btn btn-dark mx-3 me-2 d-flex align-items-center shadow-lg border-0 rounded-pill px-2 py-2" type="button">
                             <i class="fas fa-user-circle fs-4 me-2"></i> ' . ($nombreUsuario) . '
@@ -179,7 +178,7 @@ if (isset($_SESSION['usuario'])) {
                 <a class="nav-link" href="index.php?accion=VistaCrearReserva"><i class="fas fa-phone"></i> Crear Reserva</a>
              </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-calendar-check"></i> Mis Reservas</a>
+                <a class="nav-link" href="index.php?accion=VistaMiReservas"><i class="fas fa-calendar-check"></i> Mis Reservas</a>
              </li>
         </ul>
     </div>
