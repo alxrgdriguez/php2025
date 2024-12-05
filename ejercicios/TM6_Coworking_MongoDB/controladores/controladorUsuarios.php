@@ -1,11 +1,11 @@
 <?php
 
-namespace App\controladores;
+namespace AppMongo\controladores;
 
-use App\modelos\ModeloUsuarios;
-use App\modelos\Usuario;
-use App\vistas\VistaLogin;
-use App\vistas\VistaSalas;
+use AppMongo\modelos\ModeloUsuarios;
+use AppMongo\modelos\Usuario;
+use AppMongo\vistas\VistaLogin;
+use AppMongo\vistas\VistaSalas;
 
 class controladorUsuarios{
 

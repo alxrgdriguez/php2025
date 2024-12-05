@@ -1,6 +1,6 @@
 <?php
 
-namespace App\vistas;
+namespace AppMongo\vistas;
 
 class VistaCrearReserva {
 

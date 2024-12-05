@@ -1,14 +1,14 @@
 <?php
 
-namespace App\controladores;
+namespace AppMongo\controladores;
 
-use App\modelos\ModeloReservas;
-use App\modelos\ModeloSalas;
-use App\modelos\Reserva;
-use App\vistas\VistaCrearReserva;
-use App\vistas\VistaMisReservas;
-use App\vistas\VistaReservas;
-use App\vistas\VistaSalas;
+use AppMongo\modelos\ModeloReservas;
+use AppMongo\modelos\ModeloSalas;
+use AppMongo\modelos\Reserva;
+use AppMongo\vistas\VistaCrearReserva;
+use AppMongo\vistas\VistaMisReservas;
+use AppMongo\vistas\VistaReservas;
+use AppMongo\vistas\VistaSalas;
 
 class controladorReservas{
 

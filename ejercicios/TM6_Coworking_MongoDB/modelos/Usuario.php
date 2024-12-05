@@ -1,9 +1,10 @@
 <?php
 
-namespace App\modelos;
+namespace AppMongo\modelos;
 
 class Usuario{
 
+    private $id;
     private $email;
     private $nombre_usuario;
     private $password;
@@ -11,7 +12,6 @@ class Usuario{
     private $fecha_creacion;
 
     /**
-     * @param $id
      * @param $nombre_usuario
      * @param $email
      * @param $password
@@ -25,6 +25,22 @@ class Usuario{
         $this->password = $password;
         $this->telefono = $telefono;
         $this->fecha_creacion = $fecha_creacion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
 

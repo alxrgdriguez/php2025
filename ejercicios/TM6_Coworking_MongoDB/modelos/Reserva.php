@@ -1,6 +1,6 @@
 <?php
 
-namespace App\modelos;
+namespace AppMongo\modelos;
 
 
 class Reserva{

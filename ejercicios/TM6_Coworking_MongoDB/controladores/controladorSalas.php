@@ -1,10 +1,10 @@
 <?php
 
-namespace App\controladores;
+namespace AppMongo\controladores;
 
-use App\vistas\VistaSalas;
-use App\modelos\ModeloSalas;
-use App\vistas\VistaLogin;
+use AppMongo\vistas\VistaSalas;
+use AppMongo\modelos\ModeloSalas;
+use AppMongo\vistas\VistaLogin;
 
 class controladorSalas{
 

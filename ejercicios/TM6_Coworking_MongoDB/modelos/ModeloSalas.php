@@ -1,41 +1,37 @@
 <?php
 
-namespace App\modelos;
+namespace AppMongo\modelos;
 
-use App\modelos\ConexionBD;
-use App\modelos\Sala;
-use \PDO;
-use PDOException;
+use AppMongo\modelos\ConexionBD;
+use AppMongo\modelos\Sala;
+
 
 class ModeloSalas{
 
     public static function mostrarTodasLasSalas()
     {
         $conexion = new ConexionBD();
-
-        $stmt= $conexion->getConexion()->prepare("SELECT * FROM salas");
-
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Sala');
-        $stmt->execute();
-        $salas = $stmt->fetchAll();
-
+        $salas = $conexion->getConexion()->salas->find();
         $conexion->cerrarConexion();
-
-        return $salas;
+        $salasBD = array();
+        foreach ($salas as $sala) {
+            $salaBD = new Sala($sala['nombre_sala'], $sala['capacidad'], $sala['ubicacion']);
+            $salaBD->setId($sala['_id']);
+            $salasBD[] = $salaBD;
+        }
+        return $salasBD;
     }
 
     public static function obtenerNombreSalas()
     {
         $conexion = new ConexionBD();
-
-        $stmt= $conexion->getConexion()->prepare("SELECT nombre_sala FROM salas");
-
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Sala');
-        $stmt->execute();
-        // Se obtiene los resultados como un array de solo los nombres de las salas
-        $salas = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+        $salas = $conexion->getConexion()->salas->find();
         $conexion->cerrarConexion();
+        $salasBD = array();
+        foreach ($salas as $sala) {
+            $salasBD[] = $sala['nombre_sala'];
+        }
+        return $salasBD;
 
-        return $salas;
     }
 }

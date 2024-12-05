@@ -1,17 +1,17 @@
 <?php
 
-namespace App;
+namespace AppMongo;
 
 session_start();
 //session_destroy();
 
 
-use App\modelos\Reserva;
-use App\modelos\Sala;
-use App\modelos\Usuario;
-use App\controladores\controladorReservas;
-use App\controladores\controladorSalas;
-use App\controladores\controladorUsuarios;
+use AppMongo\modelos\Reserva;
+use AppMongo\modelos\Sala;
+use AppMongo\modelos\Usuario;
+use AppMongo\controladores\controladorReservas;
+use AppMongo\controladores\controladorSalas;
+use AppMongo\controladores\controladorUsuarios;
 
 
 /**

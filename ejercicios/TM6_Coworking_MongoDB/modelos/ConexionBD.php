@@ -1,9 +1,12 @@
 <?php
 
-namespace App\modelos;
+namespace AppMongo\modelos;
 
-use \PDO;
-use \PDOException;
+require_once './vendor/autoload.php';
+
+use Exception;
+use MongoDB\Client;
+
 
 class ConexionBD{
 
@@ -11,21 +14,15 @@ class ConexionBD{
 
     public function __construct() {
 
-        $host = 'mariadb:3306'; //La IP del contenedor Mysql, y el puerto interno del contenedor
+        $host = 'mongodb://root:toor@mongo:27017';
 
         try {
-            if ($this->conexion == null) {
-                $this->conexion = new PDO("mysql:host=" . $host . ";dbname=" . "COWORKING", "root", "toor");
-                $this->conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $this->conexion->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-            }
-
-        } catch (PDOException $e){
+            $this->conexion = (new Client($host))->selectDatabase('COWORKING');
+        } catch (Exception $e){
             echo $e->getMessage();
         }
 
     }
-
     /**
      * Cogemos la conexion a BBDD
      */

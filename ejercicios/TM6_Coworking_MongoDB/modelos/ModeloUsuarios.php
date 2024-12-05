@@ -1,59 +1,58 @@
 <?php
 
-namespace App\modelos;
+namespace AppMongo\modelos;
 
-use App\modelos\ConexionBD;
-use PDO;
+use AppMongo\modelos\ConexionBD;
 
 class ModeloUsuarios {
 
-    public static function registrarUsuario($usuario)
-    {
+    public static function registrarUsuario($usuario){
         $conexion = new ConexionBD();
-        $stmt= $conexion->getConexion()->prepare("INSERT INTO usuarios(email, nombre_usuario, password, telefono) VALUES (?,?,?,?)");
-        $stmt->bindValue(1, $usuario->getEmail());
-        $stmt->bindValue(2, $usuario->getNombreUsuario());
-        $stmt->bindValue(3, $usuario->getPassword());
-        $stmt->bindValue(4, $usuario->getTelefono());
-        $stmt->execute();
-        $idSesion = $usuario->getEmail();
+
+        // Consultar en mongoDB
+        $conexion->getConexion()->usuarios->insertOne(['email' => $usuario->getEmail(),
+            'nombre_usuario' => $usuario->getNombreUsuario(),
+            'password' => $usuario->getPassword(),
+            'telefono' => $usuario->getTelefono(),
+            'fecha_creacion' => date('Y-m-d')
+        ]);
         $conexion->cerrarConexion();
-        // Si es uno se ha insertado en base de datos
-        return $idSesion;
+
+        return $usuario->getEmail();
 
     }
 
-    public static function usuarioExiste($usuario)
-    {
-        $conexion = new ConexionBD();
-        $stmt= $conexion->getConexion()->prepare("SELECT * FROM usuarios WHERE email=?");
-        $stmt->bindValue(1, $usuario->getEmail());
-        $stmt->execute();
-        $conexion->cerrarConexion();
-        // Si es uno se ha insertado en base de datos
-        return $stmt->rowCount() == 1;
-    }
 
+
+    public static function usuarioExiste($usuario){
+
+        $conexion = new ConexionBD();
+        $usuarioBD = $conexion ->getConexion()->usuarios->findOne(['email' => $usuario->getEmail()]);
+        $conexion->cerrarConexion();
+
+        if($usuarioBD){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
 
     public static function obtenerUsuarioPorEmail($email){
+    {
         $conexion = new ConexionBD();
-
-        $stmt = $conexion->getConexion()->prepare("SELECT * FROM usuarios 
-                        WHERE email = ?");
-        $stmt->bindValue(1, $email);
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Usuario');
-        $stmt->execute(); //La ejecución de la consulta
-        $usuario = $stmt->fetch();
-
+        $usuarioBD = $conexion ->getConexion()->usuarios->findOne(['email' => $email]);
         $conexion->cerrarConexion();
 
-        if($stmt->rowCount() == 0){//Si no hay resultados, devuelve null
-            return null;
-        }else{
+        if($usuarioBD){
+            $usuario = new Usuario($usuarioBD['email'], $usuarioBD['nombre_usuario'], $usuarioBD['password'], $usuarioBD['telefono'], $usuarioBD['fecha_creacion']);
+            $usuario->setId($usuarioBD['_id']);
             return $usuario;
+        }else{
+            return null;
         }
     }
 
-
+    }
 
 }

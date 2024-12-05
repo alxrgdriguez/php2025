@@ -1,9 +1,10 @@
 <?php
 
-namespace App\modelos;
+namespace AppMongo\modelos;
 
 class Sala{
 
+    private $id;
     private $nombre_sala;
     private $capacidad;
     private $ubicacion;
@@ -18,6 +19,22 @@ class Sala{
         $this->nombre_sala = $nombre_sala;
         $this->capacidad = $capacidad;
         $this->ubicacion = $ubicacion;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     /**

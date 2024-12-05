@@ -1,12 +1,11 @@
 <?php
 
-namespace App\modelos;
+namespace AppMongo\modelos;
 
-use App\modelos\Reserva;
-use App\modelos\Usuario;
-use App\modelos\Sala;
-use \PDO;
-use PDOException;
+use AppMongo\modelos\Reserva;
+use AppMongo\modelos\Usuario;
+use AppMongo\modelos\Sala;
+
 
 class ModeloReservas{
     public static function obtenerNombreUsuarioPorId($id){
