@@ -1,0 +1,28 @@
+[{
+  "_id": {
+    "$oid": "6740a4dfe884ae5370429783"
+  },
+  "titulo": "Trump gana las elecciones",
+  "texto": "Nadie lo esperaba"
+},
+{
+  "_id": {
+    "$oid": "6740a5305a6b9aeb2dee44d3"
+  },
+  "texto": "El partido de la Davis ha sido el ultimo de Nadal",
+  "titulo": "Nadal se ve del Tenis"
+},
+{
+  "_id": {
+    "$oid": "6740a6415a6b9aeb2dee44d5"
+  },
+  "titulo": "El primer episodio de la serie de televisión de “El Chavo del Ocho” en España",
+  "texto": "El Chavo del Ocho es una serie de televisión que se estrena en España. La serie se estrena cada lunes a las 19:00 horas. El Chavo del Ocho es un programa de televisión que se estrena cada lunes a las 19:00 horas. El Chavo del Ocho es un programa de televisión que se estrena cada lunes a las 19:00 horas."
+},
+{
+  "_id": {
+    "$oid": "6740a6415a6b9aeb2dee44d6"
+  },
+  "titulo": "Jorfa es un gran actor",
+  "texto": "El Chavo del Ocho es una serie de televisión que se estrena en España. La serie se estrena cada lunes a las 19:00 horas. El Chavo del Ocho es un programa de televisión que se estrena cada lunes a las 19:00 horas. El Chavo del Ocho es un programa de televisión que se estrena cada lunes a las 19:00 horas."
+}]
