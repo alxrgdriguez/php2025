@@ -22,15 +22,15 @@ class Reserva{
      * @param $hora_fin
      * @param $estado
      */
-    public function __construct($id="", $correo_usuario="", $nombre_sala="", $fecha_reserva="", $hora_inicio="", $hora_fin="", $estado="")
-    {
-        $this->id = $id;
-        $this->correo_usuario = $correo_usuario;
-        $this->nombre_sala = $nombre_sala;
-        $this->fecha_reserva = $fecha_reserva;
-        $this->hora_inicio = $hora_inicio;
-        $this->hora_fin = $hora_fin;
-        $this->estado = $estado;
+     public function __construct($reserva) {
+        // Tenemos que convertir el _id a string y asignar todos los valores al objeto
+        $this->id = (string) $reserva['_id'];  // Convertir ObjectId a string
+        $this->correo_usuario = $reserva['correo_usuario'];
+        $this->nombre_sala = $reserva['nombre_sala'];
+        $this->fecha_reserva = $reserva['fecha_reserva'];
+        $this->hora_inicio = $reserva['hora_inicio'];
+        $this->hora_fin = $reserva['hora_fin'];
+        $this->estado = $reserva['estado'];
     }
 
     public function getId(): mixed

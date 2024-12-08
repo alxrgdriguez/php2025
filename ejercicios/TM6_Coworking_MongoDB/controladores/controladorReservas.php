@@ -9,6 +9,7 @@ use AppMongo\vistas\VistaCrearReserva;
 use AppMongo\vistas\VistaMisReservas;
 use AppMongo\vistas\VistaReservas;
 use AppMongo\vistas\VistaSalas;
+use DateTime;
 
 class controladorReservas{
 
@@ -33,8 +34,10 @@ class controladorReservas{
     }
 
   public static function crearReserva($reserva){
+      $horaInicio = new DateTime($reserva->getHoraInicio());
+      $horaFin = new DateTime($reserva->getHoraFin());
 
-        if($reserva->getHoraFin() <= $reserva->getHoraInicio()){
+        if($horaFin <= $horaInicio){
             $salas = ModeloSalas::obtenerNombreSalas();
             VistaCrearReserva::render($salas, "La hora de fin debe ser mayor a la hora de inicio");
             exit();

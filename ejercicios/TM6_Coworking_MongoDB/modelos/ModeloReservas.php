@@ -5,132 +5,124 @@ namespace AppMongo\modelos;
 use AppMongo\modelos\Reserva;
 use AppMongo\modelos\Usuario;
 use AppMongo\modelos\Sala;
+use MongoDB\BSON\ObjectId;
 
 
 class ModeloReservas{
-    public static function obtenerNombreUsuarioPorId($id){
+
+    public static function crearReserva($reserva){
         $conexion = new ConexionBD();
-
-        $stmt = $conexion->getConexion()->prepare("SELECT nombre FROM usuarios 
-                        WHERE id = ?");
-        $stmt->bindValue(1, $id);
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Reserva');
-        $stmt->execute(); //La ejecución de la consulta
-        $nombre = $stmt->fetch();
-
+        $conexion->getConexion()->reservas->insertOne(['correo_usuario' => $reserva->getCorreoUsuario(),
+            'nombre_sala' => $reserva->getNombreSala(), 'fecha_reserva' => $reserva->getFechaReserva(),
+            'hora_inicio' => $reserva->getHoraInicio(), 'hora_fin' => $reserva->getHoraFin(),
+            'estado' => $reserva->getEstado()]);
         $conexion->cerrarConexion();
 
-        if($stmt->rowCount() == 0){//Si no hay resultados, devuelve null
-            return null;
-        }else{
-            return $nombre;
-        }
-    }
-
-    public static function mostrarReservasPorNombreSala($nombreSala)
-    {
-        $conexion = new ConexionBD();
-
-        $stmt= $conexion->getConexion()->prepare("SELECT * FROM reservas
-                        WHERE nombre_sala= ? AND estado='confirmada'");
-        $stmt->bindValue(1, $nombreSala);
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Reserva');
-        $stmt->execute();
-        $reservas = $stmt->fetchAll();
-
-        $conexion->cerrarConexion();
-
-        return $reservas;
-
-    }
-
-    public static function crearReserva($reserva)
-    {
-        $conexion = new ConexionBD();
-        $stmt= $conexion->getConexion()->prepare("INSERT INTO reservas(correo_usuario, nombre_sala, fecha_reserva, hora_inicio, hora_fin, estado) VALUES (?,?,?,?,?,?)");
-        $stmt->bindValue(1, $reserva->getCorreoUsuario());
-        $stmt->bindValue(2, $reserva->getNombreSala());
-        $stmt->bindValue(3, $reserva->getFechaReserva());
-        $stmt->bindValue(4, $reserva->getHoraInicio());
-        $stmt->bindValue(5, $reserva->getHoraFin());
-        $stmt->bindValue(6, $reserva->getEstado());
-        $stmt->execute();
-        $conexion->cerrarConexion();
     }
 
     public static function existeReservaPorRango($nombre_sala, $fecha_reserva, $hora_inicio, $hora_fin) {
-        // Crear la conexión a la base de datos
+
         $conexion = new ConexionBD();
+        $coleccion = $conexion->getConexion()->reservas; // Reemplazar por el nombre de tu colección
 
-        // Preparar la consulta SQL para verificar si existe alguna reserva que se solape con el rango de horas
-        $stmt = $conexion->getConexion()->prepare(
-            "SELECT COUNT(*) FROM reservas 
-                    WHERE fecha_reserva = ?
-                        AND nombre_sala = ?
-                        AND estado = 'confirmada'
-                        AND (
-                            (? BETWEEN  hora_inicio AND hora_fin)
-                                OR (? BETWEEN hora_inicio AND hora_fin)
-                                OR (hora_inicio BETWEEN ? AND ?)
-                                OR (hora_fin BETWEEN ? AND ?)
-                        )"
-        );
-
-        // Bindear los parámetros
-        $stmt->bindValue(1, $fecha_reserva);
-        $stmt->bindValue(2, $nombre_sala);
-        $stmt->bindValue(3, $hora_inicio);
-        $stmt->bindValue(4, $hora_fin);
-        $stmt->bindValue(5, $hora_inicio);
-        $stmt->bindValue(6, $hora_fin);
-        $stmt->bindValue(7, $hora_inicio);
-        $stmt->bindValue(8, $hora_fin);
+        // Construir la consulta
+        $query = [
+            'fecha_reserva' => $fecha_reserva,
+            'nombre_sala' => $nombre_sala,
+            'estado' => 'confirmada',
+            '$or' => [
+                // Verificar si $hora_inicio está dentro de un rango existente
+                [
+                    '$and' => [
+                        ['hora_inicio' => ['$lte' => $hora_inicio]],
+                        ['hora_fin' => ['$gte' => $hora_inicio]]
+                    ]
+                ],
+                // Verificar si $hora_fin está dentro de un rango existente
+                [
+                    '$and' => [
+                        ['hora_inicio' => ['$lte' => $hora_fin]],
+                        ['hora_fin' => ['$gte' => $hora_fin]]
+                    ]
+                ],
+                // Verificar si el rango existente está completamente dentro del nuevo rango
+                [
+                    '$and' => [
+                        ['hora_inicio' => ['$gte' => $hora_inicio]],
+                        ['hora_fin' => ['$lte' => $hora_fin]]
+                    ]
+                ],
+                // Verificar si el rango existente incluye al nuevo rango
+                [
+                    '$and' => [
+                        ['hora_inicio' => ['$lte' => $hora_inicio]],
+                        ['hora_fin' => ['$gte' => $hora_fin]]
+                    ]
+                ]
+            ]
+        ];
 
         // Ejecutar la consulta
-        $stmt->execute();
-
-        // Obtener el resultado (la cantidad de registros que coinciden)
-        $resultado = $stmt->fetchColumn();
-
-        // Cerrar la conexión
-        $conexion->cerrarConexion();
-
-        // Si hay al menos una coincidencia, significa que hay un solapamiento
-       if ($resultado > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        $resultado = $coleccion->countDocuments($query);
+        // Retornar verdadero si hay al menos un documento que coincide
+        return $resultado > 0;
     }
 
     public static function cancelarReserva($id)
     {
         $conexion = new ConexionBD();
-
-        $stmt= $conexion->getConexion()->prepare("UPDATE reservas SET estado='cancelada'
-                        WHERE id = ?");
-        $stmt->bindValue(1, $id);
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Reserva');
-        $stmt->execute();
-
+        $idMongo = new ObjectId($id);
+        $conexion->getConexion()->reservas->updateOne(['_id' => $idMongo], ['$set' => ['estado' => 'cancelada']]);
         $conexion->cerrarConexion();
-
     }
 
-    public static function obtenerReservasPorEmail($email){
+
+    public static function obtenerReservasPorEmail($email)
+    {
+        // Crear la conexión a la base de datos
         $conexion = new ConexionBD();
 
-        $stmt= $conexion->getConexion()->prepare("SELECT * FROM reservas
-                        WHERE correo_usuario= ? AND estado='confirmada'");
-        $stmt->bindValue(1, $email);
-        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, 'App\modelos\Reserva');
-        $stmt->execute();
-        $reservas = $stmt->fetchAll();
+        // Realizar la consulta en la colección "reservas"
+        $consulta = $conexion->getConexion()->reservas->find([
+            'correo_usuario' => $email,
+            'estado' => 'confirmada'
+        ]);
 
+        // Cerrar la conexión
         $conexion->cerrarConexion();
+        // Crear un array vacío para almacenar los resultados
+        $reservas = [];
+        foreach ($consulta as $reserva) {
+            // Convertir cada resultado en un objeto Reserva
+            $reservas[] = new Reserva($reserva);
+        }
 
         return $reservas;
     }
+
+    public static  function mostrarReservasPorNombreSala($nombreSala)
+    {
+        // Crear la conexión a la base de datos
+        $conexion = new ConexionBD();
+
+        // Realizar la consulta en la colección "reservas"
+        $consulta = $conexion->getConexion()->reservas->find([
+            'nombre_sala' => $nombreSala,
+            'estado' => 'confirmada'
+        ]);
+
+        // Cerrar la conexión
+        $conexion->cerrarConexion();
+        // Crear un array vacío para almacenar los resultados
+        $reservas = [];
+        foreach ($consulta as $reserva) {
+            // Convertir cada resultado en un objeto Reserva
+            $reservas[] = new Reserva($reserva);
+        }
+
+        return $reservas;
+    }
+
 }
 
 
